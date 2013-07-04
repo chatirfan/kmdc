@@ -39,7 +39,7 @@ class Courses extends CI_Controller {
 			//$this->pr($output);
 				
 				
-			$this->load->view('courses.php',$output);
+			$this->load->view('admin/courses.php',$output);
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
