@@ -57,6 +57,15 @@ class CI_Controller {
 	{
 		return self::$instance;
 	}
+
+public function pr($data){
+	
+	echo '<pre>'; 
+	print_r($data);
+	echo '</pre>';
+	
+}
+
 }
 // END Controller class
 
