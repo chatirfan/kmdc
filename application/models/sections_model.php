@@ -9,9 +9,11 @@ class Sections_Model  extends CI_Model  {
         parent::__construct();
         $this->load->helper('form');
     }
-    
-    function get_sections_dropdown()
+    /*value parameter is passed when the function is called on edit form*/
+    function get_sections_dropdown($value)
     {   
+    	
+    	$value=(!empty($value))? $value : 1;
     	$arrSections=array();
     	
     	$this->db->select('id,section');
@@ -22,9 +24,16 @@ class Sections_Model  extends CI_Model  {
 			$arrSections[$data->id]=$data->section;
 		}
 		
-		return form_dropdown('section_id', $arrSections);
+		return form_dropdown('section_id', $arrSections,$value);
     }
     
+    
+    function get_section_by_id($section_id)
+    {
+    	$query = $this->db->get_where('sections', array('id' => $section_id));
+    	$result=$query->result();
+    	return $result[0]->section;
+    }
     
     
 		

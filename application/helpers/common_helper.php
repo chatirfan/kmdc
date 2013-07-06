@@ -14,5 +14,10 @@ if ( ! function_exists('test_method'))
     }   
     
     
+    function pr($data = '')
+    {
+    	echo '<pre>'; print_r($data); echo'</pre>';
+    	 
+    }
     
 }

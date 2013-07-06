@@ -11,8 +11,9 @@ class Groups_Model  extends CI_Model  {
         $this->load->helper('form');
     }
     
-    function get_groups_dropdown()
+    function get_groups_dropdown($value)
     {   
+    	$value=(!empty($value))? $value : 1;
     	$arrGroups=array();
     	
     	$this->db->select('id,name');
@@ -24,7 +25,14 @@ class Groups_Model  extends CI_Model  {
 		}
 		
 		
-		return form_dropdown('group_id', $arrGroups);
+		return form_dropdown('group_id', $arrGroups,$value);
+    }
+    
+    function get_group_by_id($group_id)
+    {
+    	$query = $this->db->get_where('groups', array('id' => $group_id));
+    	$result=$query->result();
+    	return $result[0]->name;
     }
     
    

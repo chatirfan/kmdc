@@ -37,6 +37,8 @@ class Courses extends CI_Controller {
 
 	function index()
 	{
+		
+		//pr($query->result()); die;
 		 //test_method('Hello World');
 		//$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 	}
@@ -56,12 +58,25 @@ class Courses extends CI_Controller {
 			$crud->set_subject('Courses');
 			$crud->required_fields('city');
 			
-			$crud->columns('course_code','course_name','course_desc','course_status','section_id');
+			$crud->columns('course_code','course_name','course_desc','course_status','section_id','year_id');
 			
 			/*Generating dropdwons for year section and course status*/
-			$crud->callback_add_field('course_status',array($this,'course_status_dropdown'));
+			$crud->callback_add_field('course_status',array($this,'status_dropdown'));
 			$crud->callback_add_field('section_id',array($this->sections,'get_sections_dropdown'));
 			$crud->callback_add_field('year_id',array($this->years,'get_years_dropdown'));
+			
+			/*call back for edit form->passes value attribute with items value to the function*/
+			$crud->callback_edit_field('course_status',array($this,'status_dropdown'));
+			$crud->callback_edit_field('section_id',array($this->sections,'get_sections_dropdown'));
+			$crud->callback_edit_field('year_id',array($this->years,'get_years_dropdown'));
+			
+			//insertion of created_by not present in form
+			$crud->callback_before_insert(array($this,'call_before_insert'));
+
+			/*callback for table view */
+			$crud->callback_column('course_status',array($this,'_status'));
+			$crud->callback_column('section_id',array($this->sections,'get_section_by_id'));
+			$crud->callback_column('year_id',array($this->years,'get_year_by_id'));
    			
 			/*used to display fields when adding items*/
 			$crud->fields('course_code','course_name','course_desc','course_status','section_id','year_id','created_by');
@@ -76,8 +91,7 @@ class Courses extends CI_Controller {
 			$crud->display_as('section_id','Section');
 			$crud->display_as('year_id','Year');
 			
-			//insertion of created by not present in form
-			$crud->callback_before_insert(array($this,'call_before_insert'));
+			
 			//$this->pr($crud); 
 			//die;
 			$output = $crud->render();
@@ -100,15 +114,20 @@ class Courses extends CI_Controller {
 	
 	}
 
-	function course_status_dropdown($param) {
+	function status_dropdown($value) {
+		$value=(!empty($value))? $value : 1;
 		$options = array(
 				'1'  => 'Active',
 				'2'    => 'Inactive',
 
 		);
-		return  form_dropdown('course_status', $options, '1');
+		return  form_dropdown('course_status', $options, $value);
 	}
 
+	function _status($value) {
+		return $value=($value==1)? 'Active' : 'Inactive';
+		
+	}
 
 	
 
