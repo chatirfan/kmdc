@@ -21,8 +21,10 @@ class Years_Model  extends CI_Model  {
 			$arrYears[$data->id]=$data->year;
 		}
 		
-		return $arrYears;
+		return form_dropdown('year_id', $arrYears);
     }
+    
+   
 		
 }
 

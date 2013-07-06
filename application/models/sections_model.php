@@ -7,9 +7,10 @@ class Sections_Model  extends CI_Model  {
     {
         // Call the Model constructor
         parent::__construct();
+        $this->load->helper('form');
     }
     
-    function get_section_dropdown()
+    function get_sections_dropdown()
     {   
     	$arrSections=array();
     	
@@ -21,8 +22,11 @@ class Sections_Model  extends CI_Model  {
 			$arrSections[$data->id]=$data->section;
 		}
 		
-		return $arrSections;
+		return form_dropdown('section_id', $arrSections);
     }
+    
+    
+    
 		
 }
 
