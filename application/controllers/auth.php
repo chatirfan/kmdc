@@ -61,8 +61,10 @@ class Auth extends CI_Controller {
 		} */
 		else
 		{
+			redirect('admin/dashboard');
+			//$this->load->view('admin/user_management.php');
 			//set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			/* $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
 			//list the users
 			$this->data['users'] = $this->ion_auth->users()->result();
@@ -71,7 +73,7 @@ class Auth extends CI_Controller {
 				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
 
-			$this->_render_page('auth/index', $this->data);
+			$this->_render_page('auth/index', $this->data); */
 		}
 	}
 
@@ -754,7 +756,7 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	function _render_page($view, $data=null, $render=false)
+	 function _render_page($view, $data=null, $render=false)
 	{
 
 		$this->viewdata = (empty($data)) ? $this->data: $data;
