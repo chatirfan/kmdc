@@ -27,14 +27,38 @@ class Auth extends CI_Controller {
 
 		if (!$this->ion_auth->logged_in())
 		{
+			
 			//redirect them to the login page
 			redirect('auth/login', 'refresh');
 		}
-		elseif (!$this->ion_auth->is_admin())
+		
+		//if logged in and is not an admin
+		elseif (($this->ion_auth->logged_in())&&(!$this->ion_auth->is_admin()) )
 		{
+			//redirect to teacher login page if group id 3
+			if ($this->ion_auth->in_group(3))
+			{
+				$this->session->set_flashdata('Welcome');
+				redirect('teachers/index');
+			}
+
+			//redirect to student login page if group id 2
+			if ($this->ion_auth->in_group(2))
+			{
+				$this->session->set_flashdata('Welcome');
+				redirect('students/index');
+			}
+			
+		}
+		
+		
+		
+		/* elseif (!$this->ion_auth->is_admin())
+		{
+			
 			//redirect them to the home page because they must be an administrator to view this
 			redirect('/', 'refresh');
-		}
+		} */
 		else
 		{
 			//set the flash data error message if there is one
