@@ -26,6 +26,7 @@ ul{list-style-type:none;margin:0;padding:0;}
 <li><a href="<?php echo site_url('admin/students/view') ?>">Students</a></li>
 <li><a href="<?php echo site_url('admin/teachers/view') ?>">Teachers</a></li>
 <li><a href="<?php echo site_url('admin/courses/view') ?>">Courses</a></li>
+<li><a href="<?php echo site_url('admin/assign_course/view') ?>">Assign Course</a></li>
 <li><a href="<?php echo site_url('/') ?>">Class</a></li>
 <li><?php echo anchor('admin/notifications/view', 'Notification', 'title="News"'); ?></li>
 
