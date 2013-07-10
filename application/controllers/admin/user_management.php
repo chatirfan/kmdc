@@ -11,7 +11,8 @@ class User_management extends CI_Controller {
 		
 		$this->load->library('ion_auth');
 		$this->load->library('form_validation');
-	
+        $this->load->library('grocery_CRUD');
+
 		
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 		
@@ -57,10 +58,16 @@ class User_management extends CI_Controller {
 		{
 			$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 		}
-		$this->_render_page('admin/user_management', $this->data);
-		
-		
-	}
+
+        //$content = $this->_render_page('admin/user_management', $this->data, true);
+        $this->viewdata = (empty($data)) ? $this->data: null;
+        //$content = $this->load->view($view, $this->viewdata, true);
+        $content = $this->load->view('admin/user_management', $this->viewdata, true);
+        // Pass to the master view
+        $this->load->view('admin/master', array('content' => $content));
+
+
+    }
 
 	
 	function _render_page($view, $data=null, $render=false)

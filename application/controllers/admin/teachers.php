@@ -85,8 +85,11 @@ class Teachers extends CI_Controller {
 			$output = $crud->render();
 			//$this->pr($output);
 
+            $content = $this->load->view('admin/teachers.php',$output,true);
+            // Pass to the master view
+            $this->load->view('admin/master', array('content' => $content));
 
-			$this->load->view('admin/teachers.php',$output);
+
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
