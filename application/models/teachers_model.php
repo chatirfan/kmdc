@@ -36,6 +36,16 @@ class Teachers_Model  extends CI_Model  {
     }
     
     
+    //returns teacher row in form of object required params id
+    
+    function get_teacher_row($id)
+    {
+    	$query = $this->db->get_where('user_teacher', array('id' => $id));
+    	$result=$query->result();
+    	return $result[0];
+    }
+    
+    
 		
 }
 

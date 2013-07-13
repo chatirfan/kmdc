@@ -13,20 +13,22 @@ class Students extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ion_auth');
+		$this->load->library('phpbb_bridge');
 		$this->load->model('Sections_Model','sections');
+		$this->load->model('Teachers_Model','teachers');
 		$this->load->model('Years_Model','years');
 		$this->load->model('Groups_Model','groups');
 		
 		
 		if (!$this->ion_auth->logged_in())
 		{
-			redirect('auth/login');
+			ci_redirect('authenticate/login');
 		}
 		
 		if (!$this->ion_auth->is_admin())
 		{
 			$this->session->set_flashdata('message', 'You must be an admin to view this page');
-			redirect('');
+			ci_redirect('');
 		}
 		
 	}
@@ -94,6 +96,8 @@ class Students extends CI_Controller {
 			
 			//creating a user before creation of student
 			$crud->callback_before_insert(array($this,'call_before_insert'));
+			//deleting user from forum_users and users table
+			$crud->callback_before_delete(array($this,'call_before_delete'));
 			
 			$output = $crud->render();
 			//$this->pr($output);
@@ -110,6 +114,8 @@ class Students extends CI_Controller {
 
 	function call_before_insert($post_array){
 		
+		
+			
 		$username = $post_array['name'];
 		$password = 'password';
 		$email = $post_array['email'];
@@ -118,6 +124,11 @@ class Students extends CI_Controller {
 				'last_name' => $post_array['name'],
 				'phone' => $post_array['phone']
 		);
+		
+		/****Adding a user to PhpBB forum *****/
+		//inserts user to forum_users table in PhpBB
+		$forum_user_id=$this->phpbb_bridge->user_add($email,$username,$password);
+		
 		$group = array('2'); // Sets user to admin. No need for array('1', '2') as user is always set to member by default
 		
 		$user_id=$this->ion_auth->register($username, $password, $email, $additional_data, $group);
@@ -125,7 +136,28 @@ class Students extends CI_Controller {
 		$post_array['user_id']=$user_id;
 		}
 		return $post_array;
+		
+		
+		
 	
+	}
+	
+function call_before_delete($user_teacher_id){
+		
+		//getting forums users id 
+		$user_teacher_row=$this->teachers->get_teacher_row($user_teacher_id);
+		$forum_id=$user_teacher_row->forum_id;
+		$user_id=$user_teacher_row->user_id;
+		
+		if($forum_id > 0){  //default value of forum id in db is 0
+			
+			/*deletes the user from phpbb forum*/
+			$this->phpbb_bridge->user_delete($forum_id);
+		}
+		
+
+		/*deletes user from users table Ion_auth*/
+		$this->ion_auth->delete_user($user_id);
 	}
 
 

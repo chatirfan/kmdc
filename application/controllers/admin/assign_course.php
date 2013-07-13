@@ -24,13 +24,13 @@ class Assign_course extends CI_Controller {
 		
 		if (!$this->ion_auth->logged_in())
 		{
-			redirect('auth/login');
+			ci_redirect('auth/login');
 		}
 		
 		if (!$this->ion_auth->is_admin())
 		{
 			$this->session->set_flashdata('message', 'You must be an admin to view this page');
-			redirect('');
+			ci_redirect('');
 		}
 		
 	}

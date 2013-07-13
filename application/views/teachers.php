@@ -32,7 +32,7 @@ a:hover
 	<h1>Teachers Landing Page</h1> 
     <div><h1>Welcome: <?php echo ucfirst($first_name); ?><h1>
     	</br>
-	<a href="<?php echo site_url('auth/logout') ?>">Logout</a>
+	<a href="<?php echo site_url('authenticate/logout') ?>">Logout</a>
     </div>
 </body>
 </html>
