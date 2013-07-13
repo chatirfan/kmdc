@@ -102,10 +102,12 @@ class Students extends CI_Controller {
 			$output = $crud->render();
 			//$this->pr($output);
 
+            $content = $this->load->view('admin/students.php',$output,true);
+            // Pass to the master view
+            $this->load->view('admin/master', array('content' => $content));
 
-			$this->load->view('admin/students.php',$output);
 
-		}catch(Exception $e){
+        }catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}

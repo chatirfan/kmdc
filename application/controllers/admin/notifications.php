@@ -92,9 +92,12 @@ class Notifications extends CI_Controller {
 			//$this->pr($output);
 
 
-			$this->load->view('admin/notifications_board.php',$output);
+            $content = $this->load->view('admin/notifications_board.php',$output, true);
+            // Pass to the master view
+            $this->load->view('admin/master', array('content' => $content));
 
-		}catch(Exception $e){
+
+        }catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
 		}
 	}

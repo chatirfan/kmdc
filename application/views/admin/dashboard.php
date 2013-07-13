@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-<?php 
-//foreach($css_files as $file): ?>
-	<link type="text/css" rel="stylesheet" href="<?php //echo $file; ?>" />
-<?php //endforeach; ?>
-<?php //foreach($js_files as $file): ?>
-	<script src="<?php //echo $file; ?>"></script>
-<?php //endforeach; ?>
-<style type='text/css'>
-body{	font-family: Arial;	font-size: 14px;}
-a{display:block;margin-left: 20px}
-li{display:inline;float:left;}
-a:hover{text-decoration: underline;}
-ul{list-style-type:none;margin:0;padding:0;}
-</style>
-</head>
-<body>
 
+<<<<<<< HEAD
 	<div style='height:20px;'></div> 
 	<h1>Admin Dashboard</h1> 
     <div>
@@ -36,3 +17,5 @@ ul{list-style-type:none;margin:0;padding:0;}
     </div>
 </body>
 </html>
+=======
+>>>>>>> 45e99619d4e3b2aa8f903954f8884a34314d2c36

@@ -98,7 +98,9 @@ class Courses extends CI_Controller {
 			//$this->pr($output);
 
 
-			$this->load->view('admin/courses.php',$output);
+            $content = $this->load->view('admin/courses.php',$output,true);
+            // Pass to the master view
+            $this->load->view('admin/master', array('content' => $content));
 
 		}catch(Exception $e){
 			show_error($e->getMessage().' --- '.$e->getTraceAsString());
