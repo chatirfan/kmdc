@@ -20,7 +20,7 @@ class Teachers extends CI_Controller {
 		
 		if (!$this->ion_auth->logged_in())
 		{
-			redirect('auth/login');
+			ci_redirect('authenticate/login');
 		}
 		
 		/* if (!$this->ion_auth->is_admin())

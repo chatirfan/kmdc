@@ -40,6 +40,9 @@ class Users_Model  extends CI_Model  {
     	return $this->ion_auth->user()->row()->id;
     
     }
+    
+    
+    
 		
 }
 

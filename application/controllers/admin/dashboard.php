@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ion_auth');
+		$this->load->library('Phpbb_bridge');
 		$this->load->model('Sections_Model','sections');
 		$this->load->model('Years_Model','years');
 		$this->load->model('Groups_Model','groups');
@@ -20,7 +21,7 @@ class Dashboard extends CI_Controller {
 		
 		if (!$this->ion_auth->logged_in())
 		{
-			redirect('auth/login');
+			ci_redirect('authenticate/login');
 		}
 		
 		/* if (!$this->ion_auth->is_admin())
