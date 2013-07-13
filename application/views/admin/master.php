@@ -33,7 +33,7 @@
 
             <li><a href="<?php echo site_url('admin/user_management') ?>">User Management</a></li>
         </ul><br/>
-        <a href="<?php echo site_url('auth/logout') ?>">Logout</a>
+        <a href="<?php echo site_url('authenticate/logout') ?>">Logout</a>
     </div>
 </div>
 
