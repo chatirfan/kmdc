@@ -84,7 +84,6 @@
                             <ul class="submenu">
                                 <li><a>Submenu 1</a> </li>
                                 <li><a>Submenu 2</a> </li>
-
                             </ul></li>
                         <li><a class="menuitem" href="<?php /*echo site_url('admin/teachers/view') */?>">Teachers</a></li>
                         <li><a class="menuitem" href="<?php /*echo site_url('admin/courses/view') */?>">Courses</a></li>
