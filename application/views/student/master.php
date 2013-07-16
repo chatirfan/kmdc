@@ -59,50 +59,24 @@
     <div class="grid_12">
         <ul class="nav main">
             <li class="ic-dashboard"><a href="<?php echo site_url('admin/dashboard') ?>"><span>Dashboard</span></a> </li>
-            <li class="ic-form-style"><a href="<?php echo site_url('admin/students/view') ?>"><span>Students</span></a>
-               <!-- <ul>
-                    <li><a href="form-controls.html">Forms</a> </li>
-                    <li><a href="buttons.html">Buttons</a> </li>
-                    <li><a href="form-controls.html">Full Page Example</a> </li>
-                    <li><a href="table.html">Page with Sidebar Example</a> </li>
-                </ul>-->
-            </li>
-            <li class="ic-notifications ic-typography"><a href="<?php echo site_url('admin/teachers/view') ?>"><span>Teacher</span></a></li>
-            <li class="ic-charts"><a href="<?php echo site_url('admin/courses/view') ?>"><span>Courses</span></a></li>
-            <li class="ic-grid-tables"><a href="<?php echo site_url('admin/notifications/view') ?>"><span>Notification Board</span></a></li>
-            <li class="ic-gallery dd"><a href="<?php echo site_url('admin/user_management') ?>"><span>User Management</span></a>
+<!--            <li class="ic-form-style"><a href="--><?php //echo site_url('admin/students/view') ?><!--"><span>Students</span></a>-->
+                <!-- <ul>
+                     <li><a href="form-controls.html">Forms</a> </li>
+                     <li><a href="buttons.html">Buttons</a> </li>
+                     <li><a href="form-controls.html">Full Page Example</a> </li>
+                     <li><a href="table.html">Page with Sidebar Example</a> </li>
+                 </ul>-->
+<!--            </li>-->
+            <li class="ic-charts"><a href="<?php echo site_url('student/courses/view') ?>"><span>Courses</span></a></li>
+            <li class="ic-form-style"><a href="<?php echo site_url('student/index/profile') ?>"><span>Profile</span></a></li>
+            <li class="ic-grid-tables"><a href="<?php echo site_url('student/index/noticeboard') ?>"><span>Notice Board</span></a></li>
+            <li class="ic-charts"><a href="<?php echo site_url('student/courses/assesment') ?>"><span>Assesments</span></a></li>
+            <li class="ic-gallery dd"><a href="<?php echo site_url('student/index/schedule') ?>"><span>Schedule</span></a>
             </li>
         </ul>
     </div>
     <div class="clear">
     </div>
-    <!--<div class="grid_2">
-        <div class="box sidemenu">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/students/view') */?>">Students</a>
-                            <ul class="submenu">
-                                <li><a>Submenu 1</a> </li>
-                                <li><a>Submenu 2</a> </li>
-                            </ul></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/teachers/view') */?>">Teachers</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/courses/view') */?>">Courses</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('/') */?>">Class</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/notifications/view') */?>">Notification Board</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/user_management') */?>">User Management</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('authenticate/logout') */?>">Logout</a></li>
-
-     <!--               <li><a class="menuitem">Menu 1</a>
-                        <ul class="submenu">
-                            <li><a>Submenu 1</a> </li>
-                            <li><a>Submenu 2</a> </li>
-
-                        </ul>
-                    </li>-->
-<!--                </ul>
-            </div>
-        </div>
-    </div>-->
     <div class="grid_12 content">
         <div class="box" style="margin-left: 0px">
             <div class="block">

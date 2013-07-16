@@ -46,7 +46,7 @@ class Authenticate extends CI_Controller {
 			if ($this->ion_auth->in_group(2))
 			{	//die('2');
 				$this->session->set_flashdata('Welcome');
-				ci_redirect('students/index');
+				ci_redirect('student/dashboard');
 			}
 			
 			//ci_redirect to admin dashboard login page if group id 1
