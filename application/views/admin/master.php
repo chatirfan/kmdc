@@ -21,10 +21,12 @@
 
 <div id="header">
     HEADER OF THE APP
+    <?php echo validation_errors(); ?>
 </div>
 <div id="sidebar" style="" >
     <div>
         <ul>
+        	<li><a href="<?php echo site_url('admin/departments/view') ?>">Departments</a></li>
             <li><a href="<?php echo site_url('admin/students/view') ?>">Students</a></li>
             <li><a href="<?php echo site_url('admin/teachers/view') ?>">Teachers</a></li>
             <li><a href="<?php echo site_url('admin/courses/view') ?>">Courses</a></li>

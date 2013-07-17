@@ -16,6 +16,7 @@ class Notifications extends CI_Controller {
 		$this->load->model('Sections_Model','sections');
 		$this->load->model('Years_Model','years');
 		$this->load->model('Groups_Model','groups');
+		$this->load->model('Common_Model','common');
 		
 		
 		if (!$this->ion_auth->logged_in())
@@ -56,7 +57,7 @@ class Notifications extends CI_Controller {
 			$crud->columns('news','news_desc','section_id','year_id','group_id','status');
 			
 			/*Generating dropdwons for year section and course status*/
-			$crud->callback_add_field('status',array($this,'status_dropdown'));
+			$crud->callback_add_field('status',array($this->common,'status_dropdown'));
 			$crud->callback_add_field('section_id',array($this->sections,'get_sections_dropdown'));
 			$crud->callback_add_field('year_id',array($this->years,'get_years_dropdown'));
 			$crud->callback_add_field('group_id',array($this->groups,'get_groups_dropdown'));
@@ -77,13 +78,13 @@ class Notifications extends CI_Controller {
 			
 			
 			/*call back for edit form->passes value attribute with items value to the function*/
-			$crud->callback_edit_field('status',array($this,'status_dropdown'));
+			$crud->callback_edit_field('status',array($this->common,'status_dropdown'));
 			$crud->callback_edit_field('section_id',array($this->sections,'get_sections_dropdown'));
 			$crud->callback_edit_field('year_id',array($this->years,'get_years_dropdown'));
 			$crud->callback_edit_field('group_id',array($this->groups,'get_groups_dropdown'));
 			
 			/*callback for table view */
-			$crud->callback_column('status',array($this,'_status'));
+			$crud->callback_column('status',array($this->common,'_status'));
 			$crud->callback_column('section_id',array($this->sections,'get_section_by_id'));
 			$crud->callback_column('year_id',array($this->years,'get_year_by_id'));
 			$crud->callback_column('group_id',array($this->groups,'get_group_by_id'));
@@ -103,25 +104,6 @@ class Notifications extends CI_Controller {
 	}
     
 	
-
-	function status_dropdown($value) {
-		
-		$value=(!empty($value))? $value : 1;
-		$options = array(
-				'1'  => 'Active',
-				'2'    => 'Inactive',
-
-		);
-		/*first parameter should be same as the field name in db */
-		return  form_dropdown('status', $options, $value);
-	}
-
-
-	
-	function _status($value) {
-		return $value=($value==1)? 'Active' : 'Inactive';
-	
-	}
 
 
 

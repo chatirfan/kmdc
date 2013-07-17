@@ -1,4 +1,5 @@
 <?php
+
 	$lang['list_add'] 				= 'Add';
 	$lang['list_actions'] 			= 'Actions';
 	$lang['list_page'] 				= 'Page';

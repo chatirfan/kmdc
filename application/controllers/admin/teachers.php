@@ -14,7 +14,7 @@ class Teachers extends CI_Controller {
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ion_auth');
 		$this->load->library('phpbb_bridge');
-		$this->load->model('Sections_Model','sections');
+		$this->load->model('Departments_Model','department');
 		$this->load->model('Years_Model','years');
 		$this->load->model('Teachers_Model','teachers');
 		$this->load->model('Groups_Model','groups');
@@ -60,14 +60,15 @@ class Teachers extends CI_Controller {
 			$crud->columns('teacher_id','name','email','phone','qualification','institution','skills','designation');
 			
 			/*used to display fields when adding items*/
-			$crud->fields('user_id','name','teacher_id','forum_id','email','phone','qualification','institution','skills','designation');
+			$crud->fields('user_id','name','teacher_id','forum_id','email','department_id','phone','qualification','institution','skills','designation');
 			
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			$crud->change_field_type('user_id','invisible');
 			$crud->change_field_type('forum_id','invisible');
 			
 
-			
+			$crud->callback_add_field('department_id',array($this->department,'get_departments_dropdown'));
+			$crud->callback_edit_field('department_id',array($this->department,'get_departments_dropdown'));
 			
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			//$crud->change_field_type('created_by','invisible');
@@ -81,6 +82,7 @@ class Teachers extends CI_Controller {
 			$crud->display_as('skill','Skills');
 			$crud->display_as('designation','Designation');
 			$crud->display_as('institution','Institution');
+			$crud->display_as('department_id','Department');
 			
 			
 			
@@ -109,7 +111,7 @@ class Teachers extends CI_Controller {
 		
 		
 		
-		$username = $post_array['name'];
+		$username = $post_array['email'];
 		$password = 'password';
 		$email = $post_array['email'];
 		$additional_data = array(
@@ -118,23 +120,30 @@ class Teachers extends CI_Controller {
 		);
 		
 		
-		/****Adding a user to PhpBB forum Start*****/
+		/* * using transactions   * * */
 		
-		//inserts user to forum_users table in forum and returns id
+		$this->db->trans_begin();
+		
+		//inserts user to forum_users table in PhpBB
 		$forum_user_id=$this->phpbb_bridge->user_add($email,$username,$password);
-		if(!empty($forum_user_id)){
+		$group = array('3');
+		
+		$user_id=$this->ion_auth->register($username, $password, $email, $additional_data, $group);
+		
+		if( (!empty($user_id) && (!empty($forum_user_id)) ) ){
+			$post_array['user_id']=$user_id;
 			$post_array['forum_id']=$forum_user_id;
+		
+			//commit if both transactions above were successfull
+			$this->db->trans_commit();
 		}
 		
-		
-		
-		
-		$group = array('3'); // Sets user to admin. No need for array('1', '2') as user is always set to member by default
-		
-		$user_id=$this->ion_auth->register($username, $password, $email,$additional_data,$group);
-		if(!empty($user_id)){
-		$post_array['user_id']=$user_id;
+		else{
+			/*ROlling back transaction*/
+			$this->db->trans_rollback();
+				
 		}
+	
 		
 		return $post_array;
 	
@@ -148,15 +157,16 @@ class Teachers extends CI_Controller {
 		$forum_id=$user_teacher_row->forum_id;
 		$user_id=$user_teacher_row->user_id;
 		
-		if($forum_id > 0){  //default value of forum id in db is 0
+		if(	(!empty($forum_id)) && (!empty($user_id))	){  //default value of forum id in db is 0
 			
 			/*deletes the user from phpbb forum*/
 			$this->phpbb_bridge->user_delete($forum_id);
+			/*deletes user from users table Ion_auth*/
+			$this->ion_auth->delete_user($user_id);
 		}
 		
 
-		/*deletes user from users table Ion_auth*/
-		$this->ion_auth->delete_user($user_id);
+		
 	}
 
 

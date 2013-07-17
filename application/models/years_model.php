@@ -31,6 +31,24 @@ class Years_Model  extends CI_Model  {
     	$result=$query->result();
     	return $result[0]->year;
     }
+    //generates dropdown for coming and past 3 years
+    function get_batch_years_dropdown($value)
+    {
+    	
+    	$date=(int)date("Y")+3;
+		$lower_limit=(int)$date-6;
+		
+		$value=(!empty($value))? $value : date("Y");
+		 
+		$dateArr=array();
+		for($a=$date;$a>=$lower_limit;$a--){
+			
+			$dateArr[$a]=$a;
+		}
+		
+		return form_dropdown('batch_year', $dateArr,$value);
+    }
+    
     
    
 		
