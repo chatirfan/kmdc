@@ -19,7 +19,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
-forum/cache/
+forum/
 
 # External tool builders
 .externalToolBuilders/
