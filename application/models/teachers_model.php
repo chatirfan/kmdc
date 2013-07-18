@@ -24,7 +24,7 @@ class Teachers_Model  extends CI_Model  {
 			$arrTeachers[$data->id]=$data->name;
 		}
 		
-		return form_dropdown('teacher_id', $arrTeachers,$value,'size="2" id="teachers_dd"');
+		return form_dropdown('teacher_id', $arrTeachers,$value,'id="teachers_dd"');
     }
     
     
