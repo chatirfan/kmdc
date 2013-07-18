@@ -62,6 +62,7 @@
 </head>
 <body>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <div id="header">
     HEADER OF THE APP
@@ -82,6 +83,8 @@
         </ul><br/>
         <a href="<?php echo site_url('authenticate/logout') ?>">Logout</a>
 =======
+=======
+>>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
 <div class="container_12">
     <div class="grid_12 header-repeat">
         <div id="branding">
@@ -105,6 +108,7 @@
         </div>
     </div>
     <div class="clear">
+<<<<<<< HEAD
 >>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
     </div>
     <div class="grid_12">
@@ -126,6 +130,28 @@
              <li class="ic-gallery dd"><a href="<?php echo site_url('admin/assign_course/view') ?>"><span>Assign Course</span></a></li>
         </ul>
     </div>
+=======
+    </div>
+    <div class="grid_12">
+        <ul class="nav main">
+            <li class="ic-dashboard"><a href="<?php echo site_url('admin/dashboard') ?>"><span>Dashboard</span></a> </li>
+            <li class="ic-form-style"><a href="<?php echo site_url('admin/students/view') ?>"><span>Students</span></a>
+               <!-- <ul>
+                    <li><a href="form-controls.html">Forms</a> </li>
+                    <li><a href="buttons.html">Buttons</a> </li>
+                    <li><a href="form-controls.html">Full Page Example</a> </li>
+                    <li><a href="table.html">Page with Sidebar Example</a> </li>
+                </ul>-->
+            </li>
+            <li class="ic-notifications ic-typography"><a href="<?php echo site_url('admin/teachers/view') ?>"><span>Teacher</span></a></li>
+            <li class="ic-charts"><a href="<?php echo site_url('admin/courses/view') ?>"><span>Courses</span></a></li>
+            <li class="ic-grid-tables"><a href="<?php echo site_url('admin/notifications/view') ?>"><span>Notification Board</span></a></li>
+            <li class="ic-gallery dd"><a href="<?php echo site_url('admin/user_management') ?>"><span>User Management</span></a></li>
+            <li class="ic-gallery dd"><a href="<?php echo site_url('admin/departments/view') ?>"><span>Departments</span></a></li>
+             <li class="ic-gallery dd"><a href="<?php echo site_url('admin/assign_course/view') ?>"><span>Assign Course</span></a></li>
+        </ul>
+    </div>
+>>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
     <div class="clear">
     </div>
  
