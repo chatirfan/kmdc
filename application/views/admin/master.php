@@ -27,9 +27,38 @@
             //setupLeftMenu();
             setSidebarHeight();
 
+            $('#courses').change(function(){ //any select change on the dropdown with id country trigger this code         
+                var course_id= $('#courses').val();
+                
+               $.ajax({
+                    type: "POST",
+                    url: "<?php echo site_url('admin/teachers/get_teachers_by_course_id'); ?>/"+course_id, //here we are calling our user controller and get_cities method with the country_id
+                     
+                    success: function(json) //we're calling the response json array 
+                    {   
+                    	if(json.length>0){ 
+                        obj = JSON.parse(json); //converting string to json obj
+                    	$("#teachers_dd > option").remove();
+                      	 $.each(obj, function() {
+                        	var opt = $('<option />'); // here we're creating a new select option with for each teacher
+                           	opt.val(this.id);
+                            opt.text(this.name);
+							$('#teachers_dd').append(opt);
+                        	// console.log(this.id+'='+this.name);
+                        	 
+                        	});
+                    	}
 
+
+                    }
+                     
+                }); 
+                 
+            });
+    			
         });
     </script>
+    
 </head>
 <body>
 <div class="container_12">
@@ -70,39 +99,14 @@
             <li class="ic-notifications ic-typography"><a href="<?php echo site_url('admin/teachers/view') ?>"><span>Teacher</span></a></li>
             <li class="ic-charts"><a href="<?php echo site_url('admin/courses/view') ?>"><span>Courses</span></a></li>
             <li class="ic-grid-tables"><a href="<?php echo site_url('admin/notifications/view') ?>"><span>Notification Board</span></a></li>
-            <li class="ic-gallery dd"><a href="<?php echo site_url('admin/user_management') ?>"><span>User Management</span></a>
-            </li>
+            <li class="ic-gallery dd"><a href="<?php echo site_url('admin/user_management') ?>"><span>User Management</span></a></li>
+            <li class="ic-gallery dd"><a href="<?php echo site_url('admin/departments/view') ?>"><span>Departments</span></a></li>
+             <li class="ic-gallery dd"><a href="<?php echo site_url('admin/assign_course/view') ?>"><span>Assign Course</span></a></li>
         </ul>
     </div>
     <div class="clear">
     </div>
-    <!--<div class="grid_2">
-        <div class="box sidemenu">
-            <div class="block" id="section-menu">
-                <ul class="section menu">
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/students/view') */?>">Students</a>
-                            <ul class="submenu">
-                                <li><a>Submenu 1</a> </li>
-                                <li><a>Submenu 2</a> </li>
-                            </ul></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/teachers/view') */?>">Teachers</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/courses/view') */?>">Courses</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('/') */?>">Class</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/notifications/view') */?>">Notification Board</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('admin/user_management') */?>">User Management</a></li>
-                        <li><a class="menuitem" href="<?php /*echo site_url('authenticate/logout') */?>">Logout</a></li>
-
-     <!--               <li><a class="menuitem">Menu 1</a>
-                        <ul class="submenu">
-                            <li><a>Submenu 1</a> </li>
-                            <li><a>Submenu 2</a> </li>
-
-                        </ul>
-                    </li>-->
-<!--                </ul>
-            </div>
-        </div>
-    </div>-->
+ 
     <div class="grid_12 content">
         <div class="box" style="margin-left: 0px">
             <div class="block">
@@ -110,8 +114,7 @@
             </div>
         </div>
     </div>
-    <div class="clear">
-    </div>
+    
 </div>
 <div class="clear">
 </div>
