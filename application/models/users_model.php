@@ -32,7 +32,9 @@ class Users_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('users', array('id' => $user_id));
     	$result=$query->result();
+    	if(!empty($result)){
     	return $result[0]->first_name;
+    	}
     }
     
     //returns user id off the logged in user

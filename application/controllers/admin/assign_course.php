@@ -106,11 +106,12 @@ class Assign_course extends CI_Controller {
 			$crud->change_field_type('assigned_by','invisible');
 			
 			/*used to change names of the fields*/
-		/* 	$crud->display_as('description','Description');
-			$crud->display_as('name','Name');
-			$crud->display_as('status','Status');
+			$crud->display_as('course_id','Course');
+		//$crud->display_as('assigned_by','Assignee');
+			$crud->display_as('assigned_to','Teacher');
 			$crud->display_as('section_id','Section');
-			$crud->display_as('year_id','Year'); */
+			$crud->display_as('year_id','Year');
+			$crud->display_as('batch_year','Batch');
 			
 			
 			//$this->pr($crud); 

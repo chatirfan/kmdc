@@ -24,7 +24,7 @@ class Teachers_Model  extends CI_Model  {
 			$arrTeachers[$data->id]=$data->name;
 		}
 		
-		return form_dropdown('teacher_id', $arrTeachers,$value);
+		return form_dropdown('teacher_id', $arrTeachers,$value,'size="2" id="teachers_dd"');
     }
     
     
@@ -32,7 +32,36 @@ class Teachers_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('user_teacher', array('id' => $teacher_id));
     	$result=$query->result();
+    	if(!empty($result)){
     	return $result[0]->name;
+    	}
+    }
+    
+    function get_teachers_by_course_id($course_id)
+    {
+    	
+    	/*
+    	 * SELECT * 
+FROM  `user_teacher` 
+INNER JOIN  `courses` ON user_teacher.department_id = courses.department_id
+AND courses.id =12
+LIMIT 0 , 30
+*/
+		$this->db->select('user_teacher.id,user_teacher.name');
+		$this->db->from('user_teacher');
+		$this->db->join('courses', 'user_teacher.department_id =courses.department_id','inner');
+		$this->db->where('courses.id', $course_id);
+		
+		$query = $this->db->get();
+		$result=$query->result();
+		
+		if(!empty($result)){
+			
+			return json_encode($result);
+			
+		}
+		
+		
     }
     
     

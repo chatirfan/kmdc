@@ -32,7 +32,9 @@ class Students_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('user_student', array('id' => $student_id));
     	$result=$query->result();
+    	if(!empty($result)){
     	return $result[0]->name;
+    	}
     }
     
     

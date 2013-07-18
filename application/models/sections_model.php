@@ -32,7 +32,9 @@ class Sections_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('sections', array('id' => $section_id));
     	$result=$query->result();
+    	if(!empty($result)){
     	return $result[0]->section;
+    	}
     }
     
     

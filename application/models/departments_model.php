@@ -28,7 +28,14 @@ class Departments_Model  extends CI_Model  {
     }
     
    
-    
+    function get_department_by_id($id)
+    {
+    	$query = $this->db->get_where('departments', array('id' => $id));
+    	$result=$query->result();
+    	if(!empty($result)){
+    	return $result[0]->name;
+    	}    
+    }  
     
     
 		

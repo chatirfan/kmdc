@@ -14,7 +14,7 @@ class Teachers extends CI_Controller {
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ion_auth');
 		$this->load->library('phpbb_bridge');
-		$this->load->model('Departments_Model','department');
+		$this->load->model('Departments_Model','departments');
 		$this->load->model('Years_Model','years');
 		$this->load->model('Teachers_Model','teachers');
 		$this->load->model('Groups_Model','groups');
@@ -57,7 +57,7 @@ class Teachers extends CI_Controller {
 			$crud->set_subject('Teachers');
 			$crud->required_fields('city');
 			
-			$crud->columns('teacher_id','name','email','phone','qualification','institution','skills','designation');
+			$crud->columns('teacher_id','name','email','phone','department_id','qualification','institution','skills','designation');
 			
 			/*used to display fields when adding items*/
 			$crud->fields('user_id','name','teacher_id','forum_id','email','department_id','phone','qualification','institution','skills','designation');
@@ -67,8 +67,8 @@ class Teachers extends CI_Controller {
 			$crud->change_field_type('forum_id','invisible');
 			
 
-			$crud->callback_add_field('department_id',array($this->department,'get_departments_dropdown'));
-			$crud->callback_edit_field('department_id',array($this->department,'get_departments_dropdown'));
+			$crud->callback_add_field('department_id',array($this->departments,'get_departments_dropdown'));
+			$crud->callback_edit_field('department_id',array($this->departments,'get_departments_dropdown'));
 			
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			//$crud->change_field_type('created_by','invisible');
@@ -90,6 +90,10 @@ class Teachers extends CI_Controller {
 			$crud->callback_before_insert(array($this,'call_before_insert'));
 			//deleting user from forum_users and users table
 			$crud->callback_before_delete(array($this,'call_before_delete'));
+			
+			
+			/*callback for table view */
+			$crud->callback_column('department_id',array($this->departments,'get_department_by_id'));
 			
 			$output = $crud->render();
 			//$this->pr($output);
@@ -167,6 +171,14 @@ class Teachers extends CI_Controller {
 		
 
 		
+	}
+	
+	function get_teachers_by_course_id($value='') {
+		//header('Content-Type: application/x-json; charset=utf-8');
+		echo $this->teachers->get_teachers_by_course_id($value);
+		
+		
+	
 	}
 
 

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Students extends CI_Controller {
+class Dashboard extends CI_Controller {
 
 	function __construct()
 	{   
@@ -39,9 +39,9 @@ class Students extends CI_Controller {
 	function index()
 	{
 		$user = $this->ion_auth->user()->row();
-	//print_r($user);
-		$this->load->view('students.php',$user);
-		
+        $content = $this->load->view('student/dashboard',$user, true);
+        // Pass to the master view
+        $this->load->view('student/master', array('content' => $content));
 	}
 
 

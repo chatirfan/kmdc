@@ -5,4 +5,5 @@ foreach($css_files as $file): ?>
 <?php foreach($js_files as $file): ?>
 <script src="<?php echo $file; ?>"></script>
 <?php endforeach; ?>
+
 <?php echo $output; ?>

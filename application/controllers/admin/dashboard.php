@@ -37,8 +37,7 @@ class Dashboard extends CI_Controller {
 
 	function index()
 	{
-
-        $content = $this->load->view('admin/dashboard.php');
+        $content = $this->load->view('admin/dashboard.php', null ,true);
         // Pass to the master view
         $this->load->view('admin/master', array('content' => $content));
 

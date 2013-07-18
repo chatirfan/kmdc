@@ -24,7 +24,7 @@ class Courses_Model  extends CI_Model  {
 			$arrCourses[$data->id]=$data->name;
 		}
 		
-		return form_dropdown('course_id', $arrCourses,$value);
+		return form_dropdown('course_id', $arrCourses,$value,'id="courses"');
     }
     
     
@@ -32,7 +32,9 @@ class Courses_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('courses', array('id' => $course_id));
     	$result=$query->result();
+    	if(!empty($result)){
     	return $result[0]->name;
+    	}
     }
     
     

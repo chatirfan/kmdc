@@ -32,7 +32,9 @@ class Groups_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('groups', array('id' => $group_id));
     	$result=$query->result();
+    	if(!empty($result)){
     	return $result[0]->name;
+    	}
     }
     
    

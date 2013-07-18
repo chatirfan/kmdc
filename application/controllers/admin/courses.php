@@ -14,6 +14,7 @@ class Courses extends CI_Controller {
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ion_auth');
 		$this->load->model('Sections_Model','sections');
+		$this->load->model('Departments_Model','departments');
 		$this->load->model('Years_Model','years');
 		$this->load->helper('common_helper');
 		
@@ -58,17 +59,21 @@ class Courses extends CI_Controller {
 			$crud->set_subject('Courses');
 			$crud->required_fields('city');
 			
-			$crud->columns('code','name','description','status','section_id','year_id');
+			$crud->columns('code','name','department_id','description','status','section_id','year_id');
 			
 			/*Generating dropdwons for year section and course status*/
 			$crud->callback_add_field('status',array($this,'status_dropdown'));
 			$crud->callback_add_field('section_id',array($this->sections,'get_sections_dropdown'));
 			$crud->callback_add_field('year_id',array($this->years,'get_years_dropdown'));
+			$crud->callback_add_field('department_id',array($this->departments,'get_departments_dropdown'));
+			
+			
 			
 			/*call back for edit form->passes value attribute with items value to the function*/
 			$crud->callback_edit_field('status',array($this,'status_dropdown'));
 			$crud->callback_edit_field('section_id',array($this->sections,'get_sections_dropdown'));
 			$crud->callback_edit_field('year_id',array($this->years,'get_years_dropdown'));
+			$crud->callback_edit_field('department_id',array($this->departments,'get_departments_dropdown'));
 			
 			//insertion of created_by not present in form
 			$crud->callback_before_insert(array($this,'call_before_insert'));
@@ -77,9 +82,11 @@ class Courses extends CI_Controller {
 			$crud->callback_column('status',array($this,'_status'));
 			$crud->callback_column('section_id',array($this->sections,'get_section_by_id'));
 			$crud->callback_column('year_id',array($this->years,'get_year_by_id'));
-   			
+			$crud->callback_column('department_id',array($this->departments,'get_department_by_id'));
+		
+			
 			/*used to display fields when adding items*/
-			$crud->fields('code','name','description','status','section_id','year_id','created_by');
+			$crud->fields('code','name','department_id','description','status','section_id','year_id','created_by');
 			
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			$crud->change_field_type('created_by','invisible');
@@ -90,6 +97,7 @@ class Courses extends CI_Controller {
 			$crud->display_as('status','Status');
 			$crud->display_as('section_id','Section');
 			$crud->display_as('year_id','Year');
+			$crud->display_as('department_id','Department');
 			
 			
 			//$this->pr($crud); 
@@ -131,6 +139,7 @@ class Courses extends CI_Controller {
 		
 	}
 
+	
 	
 
 	
