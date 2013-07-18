@@ -64,6 +64,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <div id="header">
     HEADER OF THE APP
@@ -84,6 +85,8 @@
         </ul><br/>
         <a href="<?php echo site_url('authenticate/logout') ?>">Logout</a>
 =======
+=======
+>>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
 =======
 >>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
 =======
@@ -113,6 +116,7 @@
     <div class="clear">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
     </div>
     <div class="grid_12">
@@ -135,6 +139,8 @@
         </ul>
     </div>
 =======
+=======
+>>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
 =======
 >>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
     </div>
@@ -158,6 +164,9 @@
         </ul>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
+=======
 >>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
 =======
 >>>>>>> 0767f65ea01e65123240d72c0d588ca4079f7da0
