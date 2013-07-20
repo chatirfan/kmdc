@@ -1,3 +1,5 @@
+forum/cache/*
+
 ####### PHP STORM ####
 .idea/
 
@@ -19,7 +21,8 @@ local.properties
 .classpath
 .settings/
 .loadpath
-forum/*
+
+
 
 # External tool builders
 .externalToolBuilders/

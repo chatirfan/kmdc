@@ -84,13 +84,15 @@ class Assign_course extends CI_Controller {
 			$crud->callback_edit_field('batch_year',array($this->common,'get_batch_years_dropdown'));
 			//insertion of created_by not present in form whilst updation
 			$crud->callback_before_update(array($this,'call_before_update'));
+			$crud->callback_after_update(array($this,'call_after_update'));
 			
 			//insertion of created_by not present in form whilst adition
 			$crud->callback_before_insert(array($this,'call_before_insert'));
 			
 			//bulk insertion  in sudent_course table
 			$crud->callback_after_insert(array($this,'call_after_insert'));
-				
+
+			
 			/*callback for table view */
 			$crud->callback_column('status',array($this->common,'_status'));
 			$crud->callback_column('section_id',array($this->sections,'get_section_by_id'));
@@ -151,12 +153,25 @@ class Assign_course extends CI_Controller {
 		
 		}
 		
-	
 	}
 	
 	
-	function call_before_update($post_array){
-	
+	function call_before_update($post_array,$assign_course_id){
+		//chek if year /section or batch is changed whilst update
+		$this->pr($assign_course_id); 
+		$data=array();
+		$data['id']=$assign_course_id;
+		$data['year_id']=$this->input->post('year_id');
+		$data['section_id']=$this->input->post('section_id');
+		$data['batch_year']=$this->input->post('batch_year');
+		
+		/* 
+		 * check_items function returns 1 if Section|Year|Batch is not changed else returns 0
+		 * saving this value will tell us in after_update function whether we need to make bulk insertion to students_course 
+		 * or not 
+		*/
+		$post_array['is_changed']= $this->assign->check_items($data);
+		
 		//getting user id of logged in user from auth
 		$post_array['assigned_by']=$this->users->get_user_id();
 	
@@ -167,7 +182,13 @@ class Assign_course extends CI_Controller {
 	
 	}
 	
-	
+	function call_after_update($post_array,$assign_course_id){
+		$this->pr($post_array);
+		
+		if($post_array['is_changed']==0){
+		$this->students->bulk_insert_student_course($post_array,$assign_course_id);
+			}
+	}
 	
 	function check_duplicate($str)
 	{

@@ -31,6 +31,24 @@ class assign_Course_Model  extends CI_Model  {
     	 	
     	 }
     }
+    
+    //cehcks if years ,section or batch is updated during update and return 0 incase of change else 1
+    function check_items($data)
+    {
+    	$query = $this->db->get_where('assign_course',$data);
+    	$result=$query->result();
+    	 
+    	if(!empty($result)){
+    		//if not empty means year,section,batch has not been changed so return 1
+    		return 1 ;
+    		 
+    	}
+    	else{
+    		//delete all entries from student_course where id = $data['id'] because setion year or batch has been updated
+    		$this->db->delete('student_course', array('assign_course_id ' => $data['id']));
+    		return 0;
+    	}
+    }
 		
 }
 
