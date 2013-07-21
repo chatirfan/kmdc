@@ -29,7 +29,9 @@ class Years_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('years', array('id' => $year_id));
     	$result=$query->result();
+    	if(!empty($result)){
     	return $result[0]->year;
+    	}
     }
     //generates dropdown for coming and past 3 years
     function get_batch_years_dropdown($value)
