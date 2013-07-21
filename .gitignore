@@ -22,7 +22,8 @@ local.properties
 .settings/
 .loadpath
 
-
+####### BB Forums  ####
+forum/
 
 # External tool builders
 .externalToolBuilders/
