@@ -48,6 +48,13 @@
                         	 
                         	});
                     	}
+                    	else {
+                    		$("#teachers_dd > option").remove();
+                    		var opt = $('<option />'); 
+                           	opt.val('');
+                            opt.text('None');
+							$('#teachers_dd').append(opt);
+                        	}
 
 
                     }
@@ -104,7 +111,10 @@
             <li class="ic-gallery dd"><a href="<?php echo site_url('admin/user_management') ?>"><span>User Management</span></a></li>
             <li class="ic-gallery dd"><a href="<?php echo site_url('admin/departments/view') ?>"><span>Departments</span></a></li>
              <li class="ic-gallery dd"><a href="<?php echo site_url('admin/assign_course/view') ?>"><span>Assign Course</span></a></li>
-        </ul>
+		  <li class="ic-gallery dd"><a href="<?php echo site_url('admin/course_lectures/view') ?>"><span>Lectures</span></a></li>
+		  <li class="ic-gallery dd"><a href="<?php echo site_url('forum') ?>"><span>Forum</span></a></li>
+			
+             </ul>
     </div>
 
 

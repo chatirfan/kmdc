@@ -35,7 +35,8 @@ define('FOPEN_WRITE_CREATE',					'ab');
 define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
-define('UPLOAD_LECTURES',		'assets/uploads/lectures');
+define('UPLOAD_LECTURES_FILE',		'assets/uploads/lectures/file');
+define('UPLOAD_LECTURES_AUDIO',		'assets/uploads/lectures/audio');
 
 
 /* End of file constants.php */

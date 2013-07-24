@@ -46,8 +46,11 @@ class Course_lectures extends CI_Controller {
 
 	function index()
 	{    
-	    
-		//pr($query->result()); die;
+		$query=$this->db->query("SELECT a.id, CONCAT_WS(  '_', c.name, a.batch_year ) AS  'course_name'
+FROM assign_course a
+INNER JOIN courses c ON a.course_id = c.id
+GROUP BY course_name");
+		pr($query->result()); die;
 		 //test_method('Hello World');
 		//$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 	}
@@ -66,20 +69,20 @@ class Course_lectures extends CI_Controller {
 			$crud->set_table('course_lectures');
 			$crud->set_subject('Course Lectures');
 						
-			$crud->columns('course_id','topic','topic_desc','lecture_date','created_by',
-							'created_on','day','content_id','section_id','batch_year');
+			$crud->columns('assign_course_id','topic','topic_desc','lecture_date','created_by',
+							'created_on','day','uploaded_file','uploaded_audio','section_id','batch_year');
 			
 			/*Generating dropdwons for year section and course status*/
 			
 			$crud->callback_add_field('section_id',array($this->sections,'get_sections_dropdown'));
-			$crud->callback_add_field('course_id',array($this->courses,'get_courses_dropdown'));
+			$crud->callback_add_field('assign_course_id',array($this->assign,'get_assigned_course_dropdown'));
 			$crud->callback_add_field('batch_year',array($this->common,'get_batch_years_dropdown'));
 			
 			
 			/*call back for edit form->passes value attribute with items value to the function*/
 			
 			$crud->callback_edit_field('section_id',array($this->sections,'get_sections_dropdown'));
-			$crud->callback_edit_field('course_id',array($this->courses,'get_courses_dropdown'));
+			$crud->callback_edit_field('assign_course_id',array($this->assign,'get_assigned_course_dropdown'));
 			$crud->callback_edit_field('batch_year',array($this->common,'get_batch_years_dropdown'));
 			//insertion of created_by not present in form whilst updation
 			
@@ -96,33 +99,36 @@ class Course_lectures extends CI_Controller {
 			/*callback for table view */
 			
 			$crud->callback_column('section_id',array($this->sections,'get_section_by_id'));
-			$crud->callback_column('course_id',array($this->courses,'get_course_by_id'));
+			$crud->callback_column('assign_course_id',array($this->assign,'get_assigned_course_by_id'));
 			$crud->callback_column('created_by',array($this->users,'get_user_by_id'));
-			$crud->callback_column('content_id',array($this->content,'get_content_by_id'));
+			//$crud->callback_column('uploaded_file',array($this->content,'get_content_by_id'));
 			
 			/*used to display fields when adding items*/
-			$crud->fields('course_id','topic','lecture_date','topic_desc','created_by','created_on',
-							'day','content_id','section_id','batch_year');
+			$crud->fields('assign_course_id','topic','lecture_date','topic_desc','created_by','created_on',
+							'day','uploaded_file','uploaded_audio','section_id','batch_year');
 			
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			$crud->change_field_type('created_by','invisible');
 			$crud->change_field_type('created_on','invisible');
 			
-			$crud->set_field_upload('content_id',UPLOAD_LECTURES);
+			$crud->set_field_upload('uploaded_file',UPLOAD_LECTURES_FILE);
+			$crud->set_field_upload('uploaded_audio',UPLOAD_LECTURES_AUDIO);
 			
 			/*used to change names of the fields*/
-			$crud->display_as('course_id','Course');
+			$crud->display_as('assign_course_id','Assigned Course');
 		//$crud->display_as('assigned_by','Assignee');
 			
 			$crud->display_as('section_id','Section');
-			$crud->display_as('content_id','Upload');
+			$crud->display_as('Uploaded file name','Upload');
 			$crud->display_as('batch_year','Batch');
+			$crud->display_as('uploaded_file','Uplaod File');
+			$crud->display_as('uploaded_audio','Uplaod Audio');
 			
 			
 			//$this->pr($crud); 
 			//die;
 			$crud->set_rules('batch_year','Batch Year','numeric|required');
-			//$crud->set_rules('course_id', 'Course id', 'callback_check_duplicate');
+			//$crud->set_rules('assign_course_id', 'Course id', 'callback_check_duplicate');
 			
 			$output = $crud->render();
 			//$this->pr($output);
@@ -142,7 +148,7 @@ class Course_lectures extends CI_Controller {
 		
 		$post_array['created_by']=$this->users->get_user_id();  				//getting user id of logged in user from auth
 		$post_array['created_on']= date("Y-m-d H:i:s"); 						//mysql date time
-		$post_array['content_id']=$this->content->insert_content($post_array); 	//returns content id else retuens 0
+		//$post_array['content_id']=$this->content->insert_content($post_array); 	//returns content id else retuens 0
 		return $post_array;
 			
 	}

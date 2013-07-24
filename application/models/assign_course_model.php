@@ -49,9 +49,43 @@ class assign_Course_Model  extends CI_Model  {
     		return 0;
     	}
     }
+    function get_assigned_course_dropdown($value=1){
+    	
+    	
+    	$arrCourses=array();
+    	    	
+    	$query=$this->db->query("SELECT a.id, CONCAT_WS(  '_', c.name, a.batch_year ) AS  'course_name'
+    			FROM assign_course a
+    			INNER JOIN courses c ON a.course_id = c.id
+    			GROUP BY course_name");
+    	$result=$query->result();
+    	if(!empty($result)){
+    		
+    		foreach ($result as $data ){
+    				
+    			$arrCourses[$data->id]=$data->course_name;
+    		}
+    		
+    		return form_dropdown('assign_course_id', $arrCourses,$value);
+    		 
+    	}
+    }
+    
+    function get_assigned_course_by_id($course_id)
+    {
+    	$query=$this->db->query("SELECT a.id, CONCAT_WS(  '_', c.name, a.batch_year ) AS  'course_name'
+								FROM assign_course a
+								INNER JOIN courses c ON a.course_id = c.id
+								WHERE a.id={$course_id};");
+    	$result=$query->result();
+    	if(!empty($result)){
+    		return $result[0]->course_name;
+    	}
+    }
 		
 }
-
+/*
+ $SQL_QUERY= */
 
 
 
