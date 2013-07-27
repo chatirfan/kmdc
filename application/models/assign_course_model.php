@@ -54,32 +54,33 @@ class assign_Course_Model  extends CI_Model  {
     	
     	$arrCourses=array();
     	    	
-    	$query=$this->db->query("SELECT a.id, CONCAT_WS(  '_', c.name, a.batch_year ) AS  'course_name'
+    	$query=$this->db->query("SELECT a.id,c.name
     			FROM assign_course a
     			INNER JOIN courses c ON a.course_id = c.id
-    			GROUP BY course_name");
+    			GROUP BY c.name");
+    	
     	$result=$query->result();
     	if(!empty($result)){
     		
     		foreach ($result as $data ){
     				
-    			$arrCourses[$data->id]=$data->course_name;
+    			$arrCourses[$data->id]=$data->name;
     		}
     		
-    		return form_dropdown('assign_course_id', $arrCourses,$value);
+    		return form_dropdown('assign_course_id', $arrCourses,$value,'id="assign_course"');
     		 
     	}
     }
     
     function get_assigned_course_by_id($course_id)
     {
-    	$query=$this->db->query("SELECT a.id, CONCAT_WS(  '_', c.name, a.batch_year ) AS  'course_name'
+    	$query=$this->db->query("SELECT a.id, c.name
 								FROM assign_course a
 								INNER JOIN courses c ON a.course_id = c.id
 								WHERE a.id={$course_id};");
     	$result=$query->result();
     	if(!empty($result)){
-    		return $result[0]->course_name;
+    		return $result[0]->name;
     	}
     }
 		

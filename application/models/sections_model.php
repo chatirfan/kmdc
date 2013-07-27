@@ -24,7 +24,7 @@ class Sections_Model  extends CI_Model  {
 			$arrSections[$data->id]=$data->section;
 		}
 		
-		return form_dropdown('section_id', $arrSections,$value);
+		return form_dropdown('section_id', $arrSections,$value,'id="sections"');
     }
     
     
