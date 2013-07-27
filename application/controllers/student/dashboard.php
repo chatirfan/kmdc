@@ -14,34 +14,27 @@ class Dashboard extends CI_Controller {
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ion_auth');
 		$this->load->library('Phpbb_bridge');
-		$this->load->model('Sections_Model','sections');
+        $this->load->helper('common_helper');
+        $this->load->model('Sections_Model','sections');
 		$this->load->model('Years_Model','years');
-		$this->load->model('Groups_Model','groups');
-		
-		
+        $this->load->model('Students_Model','students');
+        $this->load->model('Groups_Model','groups');
 		
 		if (!$this->ion_auth->logged_in())
 		{
 			ci_redirect('authenticate/login');
 		}
-		
-		/* if (!$this->ion_auth->is_admin())
-		{
-			$this->session->set_flashdata('message', 'You must be an admin to view this page');
-			redirect('/');
-		} */
-		
+
 	}
-
-
-
 
 	function index()
 	{
 		$user = $this->ion_auth->user()->row();
-        $content = $this->load->view('student/dashboard',$user, true);
+        $objStudent = new Students_Model();
+        $student = $objStudent->get_student_row_by_userid($user->id);
+        $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
         // Pass to the master view
-        $this->load->view('student/master', array('content' => $content));
+        $this->load->view('student/master', array('studentInfo' => $studentInfo));
 	}
 
 

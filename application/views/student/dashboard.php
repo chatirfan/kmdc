@@ -1,4 +1,4 @@
-<div class="grid_5">
+<div class="grid_6">
     <div class="box round">
         <h2>
             STUDENT</h2>
