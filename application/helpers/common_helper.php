@@ -9,7 +9,7 @@ if ( ! function_exists('test_method'))
     	$CI->load->helper('form');
     	$CI->load->model('Years_Model','years');
     	
-    	return  form_dropdown('year_id', $CI->years->get_years_dropdown());
+    	return  form_dropdown('year_id', $CI->years->get_years_dropdown(''));
        
     }   
     

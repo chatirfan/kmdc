@@ -58,7 +58,7 @@
     </div>
     <div class="grid_12">
         <ul class="nav main">
-            <li class="ic-dashboard"><a href="<?php echo site_url('admin/dashboard') ?>"><span>Dashboard</span></a> </li>
+            <li class="ic-dashboard"><a href="<?php echo site_url('student/dashboard') ?>"><span>Dashboard</span></a> </li>
 <!--            <li class="ic-form-style"><a href="--><?php //echo site_url('admin/students/view') ?><!--"><span>Students</span></a>-->
                 <!-- <ul>
                      <li><a href="form-controls.html">Forms</a> </li>
@@ -77,11 +77,15 @@
     </div>
     <div class="clear">
     </div>
-    <div class="grid_12 content">
-        <div class="box" style="margin-left: 0px">
-            <div class="block">
-                <?php echo $content; ?>
-            </div>
+    <div class="grid_12" style="padding: 15px;">
+        <div class="floatleft" style="width: 25%;height:100%;">
+            <?php echo $studentInfo; ?>
+        </div>
+        <div class="floatleft content" style="width: 50%;height:100%; background-color: #ffffff">
+            <?php echo $content; ?>
+        </div>
+        <div class="floatleft" style="width: 25%;height:100%; background-color: #e6e6fa;">
+            <?php echo $rightBar; ?>
         </div>
     </div>
     <div class="clear">

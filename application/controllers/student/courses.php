@@ -11,10 +11,16 @@ class Courses extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->helper('common_helper');
+
+        $this->load->library('grocery_CRUD');
         $this->load->library('ion_auth');
+        $this->load->library('form_validation');
+
         $this->load->model('Sections_Model','sections');
         $this->load->model('Years_Model','years');
         $this->load->model('Groups_Model','groups');
+        $this->load->model('Students_Model','students');
 
 
 
@@ -27,9 +33,13 @@ class Courses extends CI_Controller {
     function index()
     {
         $user = $this->ion_auth->user()->row();
-        $content = $this->load->view('student/dashboard',$user, true);
+        $objStudent = new Students_Model();
+        $student = $objStudent->get_student_row_by_userid($user->id);
+        $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
         // Pass to the master view
-        $this->load->view('student/master', array('content' => $content));
+        $content = $this->load->view('student/course', array(), true);
+
+        $this->load->view('student/master', array('studentInfo' => $studentInfo , 'content'=> $content));
     }
 
 

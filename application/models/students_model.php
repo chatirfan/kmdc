@@ -44,9 +44,24 @@ class Students_Model  extends CI_Model  {
     {
     	$query = $this->db->get_where('user_student', array('id' => $id));
     	$result=$query->result();
+
     	return $result[0];
     }
-    
+
+    function get_student_row_by_userid($user_id)
+    {
+        $query = $this->db->query('SELECT s.*,y.year,sc.section FROM user_student s
+                                    INNER JOIN years y on y.id = s.year_id
+                                    INNER JOIN sections sc on sc.id = s.section_id');
+        $ret = $query->result_array();
+        if(count($ret) > 0){
+            return $ret[0];
+        }
+        return null;
+    }
+
+
+
     //return 0 if insertion is successfull else return 1 
     /**
      * @first parameter:Post array
