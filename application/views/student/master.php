@@ -85,7 +85,6 @@
             <?php echo $content; ?>
         </div>
         <div class="floatleft" style="width: 25%;height:100%; background-color: #e6e6fa;">
-            <?php //echo $rightBar; ?>
         </div>
     </div>
     <div class="clear">

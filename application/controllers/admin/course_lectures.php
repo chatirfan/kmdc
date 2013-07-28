@@ -69,8 +69,8 @@ GROUP BY course_name");
 			$crud->set_table('course_lectures');
 			$crud->set_subject('Course Lectures');
 						
-			$crud->columns('section_id','batch_year','assign_course_id','topic','lecture_date','created_by',
-							'created_on','day','uploaded_file','uploaded_audio');
+			$crud->columns('assign_course_id','topic','topic_desc','lecture_date','created_by',
+							'created_on','day','uploaded_file','uploaded_audio','section_id','batch_year');
 			
 			/*Generating dropdwons for year section and course status*/
 			

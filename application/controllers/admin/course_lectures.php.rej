@@ -1,0 +1,9 @@
+diff a/application/controllers/admin/course_lectures.php b/application/controllers/admin/course_lectures.php	(rejected hunks)
+@@ -69,6 +69,7 @@
+ 			$crud->set_table('course_lectures');
+ 			$crud->set_subject('Course Lectures');
+ 						
++			$crud->columns('section_id','batch_year','assign_course_id','topic','lecture_date','created_by',
+ 							'created_on','day','uploaded_file','uploaded_audio');
+ 			
+ 			/*Generating dropdwons for year section and course status*/
