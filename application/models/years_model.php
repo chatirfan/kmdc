@@ -22,9 +22,25 @@ class Years_Model  extends CI_Model  {
 			$arrYears[$data->id]=$data->year;
 		}
 		
-		return form_dropdown('year_id', $arrYears,$value);
+		return form_dropdown('year_id', $arrYears,$value , 'id="year_id"');
     }
-    
+
+    function get_studentsyear_dropdown($value)
+    {
+        $arrYears=array();
+        $this->db->select('id,year');
+        $this->db->where('id <=', $value);
+        $query = $this->db->get('years');
+
+        foreach ($query->result() as $data ){
+
+            $arrYears[$data->id]=$data->year;
+        }
+
+        return form_dropdown('year_id', $arrYears,$value, 'id="year_id"');
+    }
+
+
     function get_year_by_id($year_id)
     {
     	$query = $this->db->get_where('years', array('id' => $year_id));

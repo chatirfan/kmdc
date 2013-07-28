@@ -6,19 +6,35 @@
  * Time: 11:46 AM
  * To change this template use File | Settings | File Templates.
  */
-
-
-$year = new Years_Model();
-
 ?>
 
 <div>
     <div id="header">
-        <div>Year: <?php echo  form_dropdown('year_id', $year->get_years_dropdown(1)); ?></div>
+        <div>Year: <?php echo  $year; ?></div>
+        <div id="courseList"></div>
     </div>
-
-
-
-
-
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        getCourses();
+    });
+
+    function getCourses(){
+
+        var year = $('#year_id').val();
+        var section = $('#section_id').val();
+
+        $.ajax({
+            type: "POST",
+            url: "<?php echo site_url('student/courses/list_all'); ?>/"+ year + "/"+ section,
+            dataType: "html",
+            success: function(data) {
+                $('#courseList').html(data);
+            }
+        })
+    }
+
+
+</script>

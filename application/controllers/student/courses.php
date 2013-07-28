@@ -21,7 +21,7 @@ class Courses extends CI_Controller {
         $this->load->model('Years_Model','years');
         $this->load->model('Groups_Model','groups');
         $this->load->model('Students_Model','students');
-
+        $this->load->model('Courses_Model','courses');
 
 
         if (!$this->ion_auth->logged_in())
@@ -33,16 +33,21 @@ class Courses extends CI_Controller {
     function index()
     {
         $user = $this->ion_auth->user()->row();
-        $objStudent = new Students_Model();
-        $student = $objStudent->get_student_row_by_userid($user->id);
+        $student = $this->students->get_student_row_by_userid($user->id);
+        $year_dropdown = $this->years->get_studentsyear_dropdown($student['year_id']);
+
         $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
         // Pass to the master view
-        $content = $this->load->view('student/course', array(), true);
+        $content = $this->load->view('student/course', array('year' => $year_dropdown), true);
 
         $this->load->view('student/master', array('studentInfo' => $studentInfo , 'content'=> $content));
     }
 
+    function list_all($year,$section){
+        $courseList = $this->courses->get_all_courses($year,$section);
 
+        $this->load->view('student/courselist',array('list'=> $courseList));
+    }
 
 
 

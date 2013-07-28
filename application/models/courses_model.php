@@ -36,9 +36,19 @@ class Courses_Model  extends CI_Model  {
     	return $result[0]->name;
     	}
     }
-    
-    
-		
+
+    function get_all_courses($year, $section)
+    {
+        $query = $this->db->query('SELECT s.*,y.year,sc.section,d.name as department FROM courses s
+                                    INNER JOIN years y on y.id = s.year_id
+                                    INNER JOIN sections sc on sc.id = s.section_id
+                                    INNER JOIN departments d on d.id = s.department_id
+                                    WHERE s.year_id = ? AND s.section_id = ?', array($year,$section));
+
+        $ret = $query->result_array();
+        return $ret;
+    }
+
 }
 
 

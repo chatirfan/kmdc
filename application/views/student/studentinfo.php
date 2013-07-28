@@ -3,7 +3,9 @@
         <table>
             <tr>
                 <td>Batch</td>
-                <td><?php echo $student['batch_year'];?></td>
+                <td><?php echo $student['batch_year'];?>
+                    <input type="hidden" id="batch_year" value="<?php echo $student['batch_year'];?>">
+                </td>
             </tr>
             <tr>
                 <td>Session</td>
@@ -11,7 +13,9 @@
             </tr>
             <tr>
                 <td>Section</td>
-                <td><?php echo $student['section'];?></td>
+                <td><?php echo trim($student['section']);?>
+                    <input type="hidden" id="section_id" value="<?php echo $student['section_id'];?>">
+                </td>
             </tr>
             <tr>
                 <td>Name</td>
