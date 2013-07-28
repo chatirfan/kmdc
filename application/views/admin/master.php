@@ -67,8 +67,8 @@
             <?php if(current_url()==site_url('admin/course_lectures/view/add')){ ?>
 
         
-        $('#batch_years').change(function(){ //any select change on the dropdown with id country trigger this code         
-            var batch_year= $(this).val();
+        $('#batch_years,#sections').change(function(){ //any select change on the dropdown with id country trigger this code         
+            var batch_year= $('#batch_years').val();
             var section_id= $('#sections').val();
 
            // alert(batch_year +'    ' +section_id);
