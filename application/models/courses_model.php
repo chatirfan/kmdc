@@ -49,6 +49,31 @@ class Courses_Model  extends CI_Model  {
         return $ret;
     }
 
-}
+   function get_course_by_batch_section($post_array)
+    {	
+    	$query=$this->db->query("SELECT a.id,c.name 
+				    			FROM assign_course a
+				    			INNER JOIN courses c ON a.course_id = c.id
+    							WHERE a.section_id={$post_array['section_id']}
+    							AND a.batch_year={$post_array['batch_year']}
+				    			GROUP BY c.name");
+    	
+    	
+    	
+    	//$query = $this->db->get_where('assign_course', array('section_id' => $post_array['section_id'],
+    													//	'batch_year' => $post_array['batch_year']));
+    	$result=$query->result();
+    	if(!empty($result)){
+    		return json_encode($result);
+    	}
+    	
+    }
+
+}   
+    
+    
+    
+		
+
 
 

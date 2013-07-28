@@ -63,7 +63,54 @@
                  
             });
     			
+     //check currents url is what we wanted 
+            <?php if(current_url()==site_url('admin/course_lectures/view/add')){ ?>
+
+        
+        $('#batch_years').change(function(){ //any select change on the dropdown with id country trigger this code         
+            var batch_year= $(this).val();
+            var section_id= $('#sections').val();
+
+           // alert(batch_year +'    ' +section_id);
+            
+           $.ajax({
+                type: "POST",
+                url: "<?php echo site_url('admin/course_lectures/get_course_by_batch_section'); ?>",
+                data: {batch_year: batch_year,section_id: section_id}, //here we are calling our user controller and get_cities method with the country_id
+				success: function(json) //we're calling the response json array 
+                {   
+	              //  alert('<pre>'+json+'</pre>');
+                	if(json.length>0){ 
+                    obj = JSON.parse(json); //converting string to json obj
+                	$("#assign_course > option").remove();
+                  	 $.each(obj, function() {
+                    	var opt = $('<option />'); // here we're creating a new select option with for each teacher
+                       	opt.val(this.id);
+                        opt.text(this.name);
+						$('#assign_course').append(opt);
+                    	// console.log(this.id+'='+this.name);
+                    	 
+                    	});
+                	}
+                	else {
+                		$("#assign_course > option").remove();
+                		var opt = $('<option />'); 
+                       	opt.val('');
+                        opt.text('None');
+						$('#assign_course').append(opt);
+                    	}
+
+
+                }
+                 
+            }); 
+             
         });
+
+        <?php } ?>
+			
+    });
+    
     </script>
     
 </head>

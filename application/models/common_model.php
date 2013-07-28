@@ -25,7 +25,7 @@ class Common_Model  extends CI_Model  {
 			$dateArr[$a]=$a;
 		}
 		
-		return form_dropdown('batch_year', $dateArr,$value);
+		return form_dropdown('batch_year', $dateArr,$value,'id="batch_years"');
     }
     
     function status_dropdown($value) {

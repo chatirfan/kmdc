@@ -69,8 +69,8 @@ GROUP BY course_name");
 			$crud->set_table('course_lectures');
 			$crud->set_subject('Course Lectures');
 						
-			$crud->columns('assign_course_id','topic','topic_desc','lecture_date','created_by',
-							'created_on','day','uploaded_file','uploaded_audio','section_id','batch_year');
+			$crud->columns('section_id','batch_year','assign_course_id','topic','lecture_date','created_by',
+							'created_on','day','uploaded_file','uploaded_audio');
 			
 			/*Generating dropdwons for year section and course status*/
 			
@@ -104,8 +104,8 @@ GROUP BY course_name");
 			//$crud->callback_column('uploaded_file',array($this->content,'get_content_by_id'));
 			
 			/*used to display fields when adding items*/
-			$crud->fields('assign_course_id','topic','lecture_date','topic_desc','created_by','created_on',
-							'day','uploaded_file','uploaded_audio','section_id','batch_year');
+			$crud->fields('section_id','batch_year','assign_course_id','topic','lecture_date','topic_desc','created_by','created_on',
+							'day','uploaded_file','uploaded_audio');
 			
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			$crud->change_field_type('created_by','invisible');
@@ -121,8 +121,8 @@ GROUP BY course_name");
 			$crud->display_as('section_id','Section');
 			$crud->display_as('Uploaded file name','Upload');
 			$crud->display_as('batch_year','Batch');
-			$crud->display_as('uploaded_file','Uplaod File');
-			$crud->display_as('uploaded_audio','Uplaod Audio');
+			$crud->display_as('uploaded_file','Lecture PPT');
+			$crud->display_as('uploaded_audio','Lecture Audio');
 			
 			
 			//$this->pr($crud); 
@@ -169,6 +169,12 @@ GROUP BY course_name");
 	function call_after_update($post_array,$assign_course_id){
 		
 	}
+	
+	function get_course_by_batch_section(){
+		//print_r($post_array);
+	echo $this->courses->get_course_by_batch_section($_POST);
+	}
+	
 
 
 }
