@@ -19,8 +19,10 @@ class Dashboard extends CI_Controller {
 		$this->load->model('Years_Model','years');
         $this->load->model('Students_Model','students');
         $this->load->model('Groups_Model','groups');
-		
-		if (!$this->ion_auth->logged_in())
+        $this->load->model('Schedules_Model','schedules');
+
+
+        if (!$this->ion_auth->logged_in())
 		{
 			ci_redirect('authenticate/login');
 		}
@@ -52,18 +54,28 @@ class Dashboard extends CI_Controller {
 
     function get_schedule(){
 
-        $start = date("Y-m-d H:i:s",$_GET['start']);
-        $end = date("Y-m-d H:i:s",$_GET['end']);
+        $start = date("Y-m-d 00:00:00",$_GET['start']);
+        $end = date("Y-m-d 23:59:59",$_GET['end']);
 
+        $result = $this->schedules->get_schedules($start,$end);
 
+        $returnArr = array();
+        foreach($result  as $item){
+            //date("HH:mm", $item['start_on']). " - ". date("HH:mm", $item['end_on'])."\n". 
+            $km = array(
+                'id' => $item['id'],
+                'title' => $item['code'].
+                    "\n". $item['course_name'],
+                'start' => $item['start_on'],
+                'end' => $item['end_on'],
+                'allDay' => false
+            );
 
-        $item = array(
-            'id' => 999,
-            'title' => 'Repeating Event GOOGLE DOOGEL',
-            'start' => '2013-07-30 14:00',
-            'allDay' => false
-        );
-        echo json_encode(array($item));
+            $returnArr[] = $km;
+
+        }
+
+        echo json_encode($returnArr);
     }
 
 

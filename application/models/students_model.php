@@ -52,7 +52,9 @@ class Students_Model  extends CI_Model  {
     {
         $query = $this->db->query('SELECT s.*,y.year,sc.section FROM user_student s
                                     INNER JOIN years y on y.id = s.year_id
-                                    INNER JOIN sections sc on sc.id = s.section_id');
+                                    INNER JOIN sections sc on sc.id = s.section_id
+                                    WHERE s.user_id = '. $user_id );
+
         $ret = $query->result_array();
         if(count($ret) > 0){
             return $ret[0];
