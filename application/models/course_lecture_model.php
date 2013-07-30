@@ -11,7 +11,7 @@ class course_Lecture_Model  extends CI_Model  {
     
   
     //generates dropdown for coming and past 3 years
-    function get_topic_dropdown($value)
+    function get_topic_dropdown($value=NULL)
     {
     	$value=(!empty($value))? $value : 1;
     	$arrTopic=array();
