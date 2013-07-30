@@ -61,7 +61,7 @@ class Dashboard extends CI_Controller {
 
         $returnArr = array();
         foreach($result  as $item){
-            //date("HH:mm", $item['start_on']). " - ". date("HH:mm", $item['end_on'])."\n". 
+            //date("HH:mm", $item['start_on']). " - ". date("HH:mm", $item['end_on'])."\n".
             $km = array(
                 'id' => $item['id'],
                 'title' => $item['code'].
