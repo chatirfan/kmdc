@@ -43,6 +43,17 @@ class Common_Model  extends CI_Model  {
     
     }
     
+    function answer_type_dropdown(){
+    	    	
+    	$value=(!empty($value))? $value : 'MCQ';
+    	$options = array(
+    			'MCQ'  => 'MCQ',
+    			'TRUE/FALSE'    => 'TRUE/FALSE',
+    	
+    	);
+    	return  form_dropdown('type', $options, $value,'id="field-type"');
+    }
+    
    
 		
 }

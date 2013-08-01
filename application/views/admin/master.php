@@ -108,6 +108,33 @@
         });
 
         <?php } ?>
+
+        <?php if(current_url()==site_url('admin/questions/view/add')){ ?>
+        
+		 var html_question=<?php echo json_encode($this->load->view('static/questions_form.php', NULL, true)); ?>;
+		 var html_true_false=<?php echo json_encode($this->load->view('static/true_false_form.php', NULL, true)); ?>;
+
+	        $('#field-type').change(function(){ //any select change on the dropdown with id country trigger this code         
+
+	        	  var type= $('#field-type').val();
+	        	  alert(type);
+	        	  if(type=="MCQ"){
+	        		  if ($('#answers_input_box').length==0){
+	        		  var divv = $('<div id="answers_input_box" class="form-input-box"/>');  
+	        		  
+	        		  $('.pretty-radio-buttons').remove();
+	        		  $('#answers_display_as_box').after(divv.append(html_question));
+
+	        		  } }
+	        	  if(type=="TRUE/FALSE"){
+						$('#answers_input_box').remove();
+						$('#answers_display_as_box').after(html_true_false);
+		        	  }
+        });
+        
+		
+					
+        <?php  }?>
 			
     });
     
