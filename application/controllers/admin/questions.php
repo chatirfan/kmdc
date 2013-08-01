@@ -19,7 +19,7 @@ class Questions extends CI_Controller {
 		$this->load->model('Users_Model','users');
 		$this->load->model('Common_Model','common');
 		$this->load->model('Answers_Model','answers');
-		
+		$this->load->model('Questions_Model','questions');
 		
 		
 		if (!$this->ion_auth->logged_in())
@@ -57,7 +57,7 @@ class Questions extends CI_Controller {
 			$crud->set_theme('flexigrid');
 			$crud->set_table('questions');
 			$crud->set_subject('Questions');
-			$crud->required_fields('type');
+			//$crud->required_fields('type');
 			
 			$crud->columns('lecture_id','question');
 			
@@ -72,7 +72,7 @@ class Questions extends CI_Controller {
 			$crud->callback_field ( 'year', array ( $this->years,'get_years_dropdown' ) );
 			$crud->callback_field ( 'course', array ( $this->courses,'get_courses_dropdown' ) );
 			//$crud->callback_field ( 'tester', array ( $this,'tester' ) );
-			
+			$crud->callback_edit_field( 'answers', array ( $this,'callback_edit_answers' ) );
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 		
 			
@@ -98,6 +98,11 @@ class Questions extends CI_Controller {
 			$crud->callback_before_insert(array($this,'call_before_insert'));
 			$crud->callback_after_insert(array($this,'call_after_insert'));
 			
+			$crud->callback_before_update(array($this,'call_before_update'));
+			$crud->callback_after_update(array($this,'call_after_update'));
+			
+			$crud->callback_after_delete(array($this,'call_after_delete'));
+			
 			
 			$output = $crud->render();
 			//$this->pr($output);
@@ -118,6 +123,20 @@ class Questions extends CI_Controller {
 	
 		return $this->load->view('static/questions_form.php', NULL, true);  //static form html for answers
 	}
+
+	function  callback_edit_answers($answer,$question_id){
+		 
+		$question_type=$this->questions->get_question_type($question_id); //get question type 
+		
+		if($question_type=='MCQ'){
+			$answers=$this->answers->get_answers_by_question_id($question_id);//getting answers MCQS
+			return $this->load->view('static/questions_form.php', $answers, true);  //static form html for answers
+		}
+		if($question_type=='TRUE/FALSE'){
+			$answers=$this->answers->get_answers_by_question_id($question_id);
+			return $this->load->view('static/true_false_form.php', $answers, true);  //static form html for answers
+		}
+		}
     
 	
 	function call_before_insert($post_array){
@@ -131,6 +150,21 @@ class Questions extends CI_Controller {
 	
 	}
 
+	function call_before_update($post_array){
+		//$this->pr($post_array); die;
+		$post_array['created_by']=$this->users->get_user_id();
+		return $post_array;
+	}
+	
+	function call_after_update($post_array,$question_id){
+		$this->answers->update_answers($post_array,$question_id);
+	
+	}
+	
+function call_after_delete($question_id){
+		$this->answers->delete_answers($question_id);
+	
+	}
 
 
 
