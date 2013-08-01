@@ -68,10 +68,10 @@
                  </ul>-->
 <!--            </li>-->
             <li class="ic-charts"><a href="<?php echo site_url('student/courses/view') ?>"><span>Courses</span></a></li>
-            <li class="ic-form-style"><a href="<?php echo site_url('student/index/profile') ?>"><span>Profile</span></a></li>
-            <li class="ic-grid-tables"><a href="<?php echo site_url('student/index/noticeboard') ?>"><span>Notice Board</span></a></li>
-            <li class="ic-charts"><a href="<?php echo site_url('student/courses/assesment') ?>"><span>Assesments</span></a></li>
-            <li class="ic-gallery dd"><a href="<?php echo site_url('student/index/schedule') ?>"><span>Schedule</span></a>
+            <li class="ic-form-style"><a href="<?php echo site_url('student/dashboard/profile') ?>"><span>Profile</span></a></li>
+            <li class="ic-grid-tables"><a href="<?php echo site_url('student/dashboard/noticeboard') ?>"><span>Notice Board</span></a></li>
+            <li class="ic-charts"><a href="<?php echo site_url('student/dashboard/assesment') ?>"><span>Assesments</span></a></li>
+            <li class="ic-gallery dd"><a href="<?php echo site_url('student/dashboard/schedule') ?>"><span>Schedule</span></a>
             </li>
         </ul>
     </div>
