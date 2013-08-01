@@ -9,7 +9,9 @@
             </tr>
             <tr>
                 <td>Session</td>
-                <td><?php echo $student['year'];?></td>
+                <td><?php echo $student['year'];?>
+                    <input type="hidden" id="year_id" value="<?php echo $student['year_id'];?>">
+                </td>
             </tr>
             <tr>
                 <td>Section</td>

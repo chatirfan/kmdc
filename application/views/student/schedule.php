@@ -38,6 +38,7 @@
             maxTime: 18,
             events: {
                 url: '<?php echo site_url('student/dashboard/get_schedule'); ?>',
+                data:{ year_id: $('#year_id').val(), batch_year: $('#batch_year').val() },
                 cache: true
             }
             /*events: [

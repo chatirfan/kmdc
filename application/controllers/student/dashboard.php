@@ -56,23 +56,58 @@ class Dashboard extends CI_Controller {
 
         $start = date("Y-m-d 00:00:00",$_GET['start']);
         $end = date("Y-m-d 23:59:59",$_GET['end']);
+        $batch_year = trim($_GET['batch_year']);
+        $year = trim($_GET['year_id']);
 
-        $result = $this->schedules->get_schedules($start,$end);
+        $timeStamp = strtotime($start);
+
+        $actualYear= (int) $batch_year + (int) $year -1;
+
+        //$result = $this->schedules->get_schedules($start,$end);
+        $result = $this->schedules->get_schedulesByYear($actualYear);
 
         $returnArr = array();
         foreach($result  as $item){
-            //date("HH:mm", $item['start_on']). " - ". date("HH:mm", $item['end_on'])."\n".
+            switch(strtolower($item['day'])){
+                case 'sunday':{
+                    $dayDate = mktime(0, 0, 0, date("m",$timeStamp)  , date("d",$timeStamp), date("Y",$timeStamp));
+                    break;
+                }
+                case 'monday':{
+                    $dayDate = mktime(0, 0, 0, date("m",$timeStamp)  , date("d",$timeStamp)+1, date("Y",$timeStamp));
+                    break;
+                }
+                case 'tuesday':{
+                    $dayDate = mktime(0, 0, 0, date("m",$timeStamp)  , date("d",$timeStamp)+2, date("Y",$timeStamp));
+                    break;
+                }
+                case 'wednesday':{
+                    $dayDate = mktime(0, 0, 0, date("m",$timeStamp)  , date("d",$timeStamp)+3, date("Y",$timeStamp));
+                    break;
+                }
+                case 'thursday':{
+                    $dayDate = mktime(0, 0, 0, date("m",$timeStamp)  , date("d",$timeStamp)+4, date("Y",$timeStamp));
+                    break;
+                }
+                case 'friday':{
+                    $dayDate = mktime(0, 0, 0, date("m",$timeStamp)  , date("d",$timeStamp)+5, date("Y",$timeStamp));
+                    break;
+                }
+                case 'saturday':{
+                    $dayDate = mktime(0, 0, 0, date("m",$timeStamp)  , date("d",$timeStamp)+6, date("Y",$timeStamp));
+                    break;
+                }
+            }
+
             $km = array(
                 'id' => $item['id'],
-                'title' => $item['code'].
-                    "\n". $item['course_name'],
-                'start' => $item['start_on'],
-                'end' => $item['end_on'],
+                'title' => $item['code']."\n". $item['course_name'],
+                'start' => date('Y-m-d H:i:s', strtotime(date('Y-m-d', $dayDate).' '. date('H:i:s', strtotime($item['start_on'])))),
+                'end'   => date('Y-m-d H:i:s', strtotime(date('Y-m-d', $dayDate).' '. date('H:i:s', strtotime($item['end_on'])))),
                 'allDay' => false
             );
 
             $returnArr[] = $km;
-
         }
 
         echo json_encode($returnArr);
