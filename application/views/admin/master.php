@@ -108,8 +108,11 @@
         });
 
         <?php } ?>
-
-        <?php if(current_url()==site_url('admin/questions/view/add')){ ?>
+        <?php 	$siteurl=site_url('admin/questions/view/edit'); 
+        		$siteurl='*'.$siteurl.'*'; 
+        		$currenturi=current_url(); $edit_url= (preg_match($siteurl,$currenturi));   ?>
+        		
+        <?php if(current_url()==site_url('admin/questions/view/add')  || $edit_url==1){ ?>
         
 		 var html_question=<?php echo json_encode($this->load->view('static/questions_form.php', NULL, true)); ?>;
 		 var html_true_false=<?php echo json_encode($this->load->view('static/true_false_form.php', NULL, true)); ?>;
@@ -117,7 +120,7 @@
 	        $('#field-type').change(function(){ //any select change on the dropdown with id country trigger this code         
 
 	        	  var type= $('#field-type').val();
-	        	  alert(type);
+	        	 
 	        	  if(type=="MCQ"){
 	        		  if ($('#answers_input_box').length==0){
 	        		  var divv = $('<div id="answers_input_box" class="form-input-box"/>');  
@@ -186,6 +189,7 @@
             <li class="ic-gallery dd"><a href="<?php echo site_url('admin/departments/view') ?>"><span>Departments</span></a></li>
              <li class="ic-gallery dd"><a href="<?php echo site_url('admin/assign_course/view') ?>"><span>Assign Course</span></a></li>
 		  <li class="ic-gallery dd"><a href="<?php echo site_url('admin/course_lectures/view') ?>"><span>Lectures</span></a></li>
+		  <li class="ic-gallery dd"><a href="<?php echo site_url('admin/questions/view') ?>"><span>Assesment</span></a></li>
 		  <li class="ic-gallery dd"><a href="<?php echo site_url('forum') ?>"><span>Forum</span></a></li>
 			
              </ul>
