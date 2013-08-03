@@ -91,7 +91,8 @@ h2#page-heading {
 .box {
 	background:#fff;
 	margin-bottom:20px;
-	padding:10px 10px 10px 10px; margin-left:-8px;
+	padding:10px 10px 10px 10px;
+    /*margin-left:-8px;*/
 }
 .box.grid{padding-bottom:40px;}
 .box.round{
@@ -1131,3 +1132,34 @@ td.details {
 }
 
 .gallery-sand .sorting{background-color:white !important;}
+
+.notice-title{ font-size:1.2em;
+    font-weight:bold;
+    color:#1B548D;
+    width: 70%;
+    float:left;
+}
+.notice-date{ text-align:right; width: 30%; float:left;}
+
+.box-header {
+    width: 100%;
+    font-size:1em;
+    background:#E6F0F3;
+    margin: -7px -10px 0 0px;
+/*
+    margin:-10px -10px 0 -10px;
+*/
+    padding:10px 12px;
+    border-bottom:1px solid #B3CBD6;
+
+    -moz-border-radius: 5px 5px 0px 0px; /* Firefox */
+    -webkit-border-radius: 5px 5px 0px 0px; /* Safari, Chrome */
+    border-radius: 5px 5px 0px 0px; /* CSS3 */
+}
+
+.notice-body {
+    width: 100%;
+    padding: 5px 5px;
+}
+
+.content { padding: 0 10px 0 10px;}

@@ -52,8 +52,7 @@ class Notifications extends CI_Controller {
 			$crud->set_theme('flexigrid');
 			$crud->set_table('notification_board');
 			$crud->set_subject('Notification Board');
-			$crud->required_fields('city');
-			
+
 			$crud->columns('news','news_desc','section_id','year_id','group_id','status');
 			
 			/*Generating dropdwons for year section and course status*/
