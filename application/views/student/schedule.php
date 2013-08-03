@@ -41,38 +41,7 @@
                 data:{ year_id: $('#year_id').val(), batch_year: $('#batch_year').val() },
                 cache: true
             }
-            /*events: [
-                {
-                    id: 999,
-                    title: 'Repeating Event GOOGLE DOOGEL',
-                    start: '2013-07-30 14:00',
-                    allDay: false
-                },]*/
-/*                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d+4, 16, 0),
-                    allDay: false
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d+1, 10, 30),
-                    allDay: false
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d+1, 15, 0),
-                    end: new Date(y, m, d+1, 16, 0),
-                    allDay: false
-                }
 
-               *//* {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/'
-                }*//*
-            ]*/
         });
 
     });
@@ -87,5 +56,5 @@
         font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
     }
 </style>
-
+<h1>Schedule</h1>
 <div id='calendar'></div>

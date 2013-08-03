@@ -41,8 +41,6 @@ class Dashboard extends CI_Controller {
 
 
     function schedule(){
-
-
         $user = $this->ion_auth->user()->row();
 
         $student = $this->students->get_student_row_by_userid($user->id);
@@ -113,5 +111,13 @@ class Dashboard extends CI_Controller {
         echo json_encode($returnArr);
     }
 
+    function noticeboard(){
+        $user = $this->ion_auth->user()->row();
+        $student = $this->students->get_student_row_by_userid($user->id);
+        $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
+
+        $content = $this->load->view('student/noticeboard',array(),true);
+        $this->load->view('student/master', array('studentInfo' => $studentInfo, 'content' => $content));
+    }
 
 }
