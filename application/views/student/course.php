@@ -7,14 +7,14 @@
  * To change this template use File | Settings | File Templates.
  */
 ?>
-
+<h3>Courses</h3>
 <div>
     <div id="header">
         <div>Year: <?php echo  $year; ?></div>
+        <br/>
         <div id="courseList"></div>
     </div>
 </div>
-
 
 <script type="text/javascript">
     $(document).ready(function () {
