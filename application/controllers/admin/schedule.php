@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Courses extends CI_Controller {
+class Schedule extends CI_Controller {
 
 	function __construct()
 	{   
@@ -15,7 +15,7 @@ class Courses extends CI_Controller {
 		$this->load->library('ion_auth');
 		$this->load->model('Sections_Model','sections');
 		$this->load->model('Departments_Model','departments');
-		$this->load->model('Years_Model','years');
+		$this->load->model('assign_Course_Model','assign');
 		$this->load->model('Courses_Model','courses');
 		$this->load->helper('common_helper');
 		
@@ -57,49 +57,41 @@ class Courses extends CI_Controller {
 			$crud = new grocery_CRUD();
 
 			$crud->set_theme('flexigrid');
-			$crud->set_table('courses');
-			$crud->set_subject('Courses');
-			$crud->required_fields('code','name','description');
+			$crud->set_table('schedules');
+			$crud->set_subject('Schedule');
+			$crud->required_fields('start_on','end_on','room','day','duration');
 			
-			$crud->columns('code','name','department_id','description','status','section_id','year_id');
+			$crud->columns('assign_course_id','start_on','end_on','room','day','duration','created_by');
 			
 			/*Generating dropdwons for year section and course status*/
-			$crud->callback_add_field('status',array($this,'status_dropdown'));
-			$crud->callback_add_field('section_id',array($this->sections,'get_sections_dropdown'));
-			$crud->callback_add_field('year_id',array($this->years,'get_years_dropdown'));
-			$crud->callback_add_field('department_id',array($this->departments,'get_departments_dropdown'));
 			
-			
+			$crud->callback_add_field('assign_course_id',array($this->assign,'get_assigned_course_dropdown'));
 			
 			/*call back for edit form->passes value attribute with items value to the function*/
-			$crud->callback_edit_field('status',array($this,'status_dropdown'));
-			$crud->callback_edit_field('section_id',array($this->sections,'get_sections_dropdown'));
-			$crud->callback_edit_field('year_id',array($this->years,'get_years_dropdown'));
-			$crud->callback_edit_field('department_id',array($this->departments,'get_departments_dropdown'));
+			
+			$crud->callback_edit_field('assign_course_id',array($this->assign,'get_assigned_course_dropdown'));
 			
 			//insertion of created_by not present in form
 			$crud->callback_before_insert(array($this,'call_before_insert'));
 
 			/*callback for table view */
-			$crud->callback_column('status',array($this,'_status'));
-			$crud->callback_column('section_id',array($this->sections,'get_section_by_id'));
-			$crud->callback_column('year_id',array($this->years,'get_year_by_id'));
-			$crud->callback_column('department_id',array($this->departments,'get_department_by_id'));
+			
+			$crud->callback_column('assign_course_id',array($this->assign,'get_assigned_course_by_id'));
 		
 			
 			/*used to display fields when adding items*/
-			$crud->fields('code','name','department_id','description','status','section_id','year_id','created_by');
+			$crud->fields('assign_course_id','start_on','end_on','room','day','duration','created_by');
 			
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			$crud->change_field_type('created_by','invisible');
 			
-			/*used to change names of the fields*/
+			/*used to change names of the fields
 			$crud->display_as('description','Description');
 			$crud->display_as('name','Name');
 			$crud->display_as('status','Status');
 			$crud->display_as('section_id','Section');
 			$crud->display_as('year_id','Year');
-			$crud->display_as('department_id','Department');
+			$crud->display_as('department_id','Department');*/
 			
 			
 			//$this->pr($crud); 
@@ -126,25 +118,7 @@ class Courses extends CI_Controller {
 	
 	}
 
-	function status_dropdown($value) {
-		$value=(!empty($value))? $value : 1;
-		$options = array(
-				'1'  => 'Active',
-				'2'    => 'Inactive',
 
-		);
-		return  form_dropdown('status', $options, $value);
-	}
-
-	function _status($value) {
-		return $value=($value==1)? 'Active' : 'Inactive';
-		
-	}
-	
-	function get_courses_by_year(){
-		//print_r($post_array);
-		echo $this->courses->get_courses_by_year($_POST);
-	}
 
 	
 	

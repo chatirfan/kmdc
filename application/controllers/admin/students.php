@@ -67,7 +67,7 @@ class Students extends CI_Controller {
 			$crud->set_theme('flexigrid');
 			$crud->set_table('user_student');
 			$crud->set_subject('Students');
-			$crud->required_fields('city');
+			$crud->required_fields('student_id','name','email','father_name','address','religion','phone','gender','role_number','dob','phone_home','phone_father');
 			
 			
 			$crud->columns('student_id','name','email','father_name','address','religion','phone','role_number','batch_year','section_id','year_id');

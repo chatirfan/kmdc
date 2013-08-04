@@ -55,7 +55,7 @@ class Teachers extends CI_Controller {
 			$crud->set_theme('flexigrid');
 			$crud->set_table('user_teacher');
 			$crud->set_subject('Teachers');
-			$crud->required_fields('city');
+			$crud->required_fields('teacher_id','name','email','phone','qualification','institution','skills','designation');
 			
 			$crud->columns('teacher_id','name','email','phone','department_id','qualification','institution','skills','designation');
 			

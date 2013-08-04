@@ -35,6 +35,17 @@ class course_Lecture_Model  extends CI_Model  {
     		return $result[0]->topic;
     	}
     }
+    
+    function get_topic_by_assignedcourseid($post_array)
+    {
+    	$this->db->select('id, topic');
+    	$query = $this->db->get_where('course_lectures', array('assign_course_id' => $post_array['assign_course_id']));
+    	$result=$query->result();
+    	if(!empty($result)){
+    		return json_encode($result);
+    	}
+    
+    }
   
    
 		
