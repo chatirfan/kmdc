@@ -18,6 +18,7 @@
                     "<tr><td>Description: </td><td>". $item['description']."</td></tr>".
                     "<tr><td>Year: </td><td>". $item['year']."</td></tr>".
                     "<tr><td>Section: </td><td>". $item['section']."</td></tr>".
+                    "<tr><td>Detail:    </td><td>". anchor('student/courses/view/'. $item['id'] , 'click here')."</td></tr>".
                     "<table>";
 //            $html.= "<div> ".
 //                    "Code: ". $item['code'].

@@ -26,7 +26,20 @@ class Courses_Model  extends CI_Model  {
 		
 		return form_dropdown('course_id', $arrCourses,$value,'id="courses"');
     }
-    
+
+    function get_course($id)
+    {
+        $query = $this->db->query('SELECT s.*,y.year,sc.section,d.name as department FROM courses s
+                                    INNER JOIN years y on y.id = s.year_id
+                                    INNER JOIN sections sc on sc.id = s.section_id
+                                    INNER JOIN departments d on d.id = s.department_id
+                                    WHERE s.id = ? ',array($id));
+        $result=$query->result();
+        if(!empty($result)){
+            return $result[0];
+        }else
+            return null;
+    }
     
     function get_course_by_id($course_id)
     {
@@ -68,6 +81,7 @@ class Courses_Model  extends CI_Model  {
     	}
     	
     }
+
 
 }   
     

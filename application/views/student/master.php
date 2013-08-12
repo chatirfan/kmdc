@@ -77,15 +77,15 @@
     </div>
     <div class="clear">
     </div>
-    <div class="grid_12" style="padding: 15px;">
+    <div class="grid_12">
         <div class="floatleft" style="width: 25%;height:100%;">
             <?php echo $studentInfo; ?>
         </div>
-        <div class="floatleft content" style="width: 50%;height:100%; background-color: #ffffff">
+        <div class="floatleft content" style="width: 75%;height:100%; background-color: #ffffff">
             <?php echo $content; ?>
         </div>
-        <div class="floatleft" style="width: 25%;height:100%; background-color: #e6e6fa;">
-        </div>
+        <!--<div class="floatleft" style="width: 25%;height:100%; background-color: #e6e6fa;">
+        </div>-->
     </div>
     <div class="clear">
     </div>
