@@ -48,7 +48,7 @@ class Departments extends CI_Controller {
 			$crud->set_theme('flexigrid');
 			$crud->set_table('departments');
 			$crud->set_subject('Departments');
-			$crud->required_fields('city');
+			$crud->required_fields('name');
 			
 			
 			$crud->columns('name');

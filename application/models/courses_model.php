@@ -81,6 +81,16 @@ class Courses_Model  extends CI_Model  {
     	}
     	
     }
+    
+    function get_courses_by_year($post_array)
+    {	$this->db->select('id, name');
+    	$query = $this->db->get_where('courses', array('year_id' => $post_array['year_id']));
+    	$result=$query->result();
+    					if(!empty($result)){
+    					return json_encode($result);
+    }
+     
+    }
 
 
 }   

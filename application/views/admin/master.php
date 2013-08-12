@@ -113,10 +113,25 @@
         		$currenturi=current_url(); $edit_url= (preg_match($siteurl,$currenturi));   ?>
         		
         <?php if(current_url()==site_url('admin/questions/view/add')  || $edit_url==1){ ?>
-        
+
+        var year_id=$('#year_id').val(); //get year id to populate courses and topic accordingly
+        var course_id=$('#courses').val();
+        	ajax_call_course(year_id);
+       
+
+        $('#year_id').change(function(){
+			        var yr=	$(this).val();
+			        ajax_call_course(yr);
+			}); 
+
+         $('#assign_course').change(function(){
+        	 var assign_course_id=	$(this).val();
+        	 ajax_call_topic(assign_course_id);
+			}); 
+    	
 		 var html_question=<?php echo json_encode($this->load->view('static/questions_form.php', NULL, true)); ?>;
 		 var html_true_false=<?php echo json_encode($this->load->view('static/true_false_form.php', NULL, true)); ?>;
-
+				
 	        $('#field-type').change(function(){ //any select change on the dropdown with id country trigger this code         
 
 	        	  var type= $('#field-type').val();
@@ -140,7 +155,85 @@
         <?php  }?>
 			
     });
-    
+        
+    function ajax_call_course(yr){
+    	 $.ajax({
+             type: "POST",
+             url: "<?php echo site_url('admin/assign_course/get_assigned_courses_by_year'); ?>",
+             data: {year_id: yr}, //here we are calling our user controller and passing year id to get courses accordingly
+				success: function(json) //we're calling the response json array 
+             {   
+	                //alert('<pre>'+json+'</pre>');
+             	if(json.length>0){ 
+                 obj = JSON.parse(json); //converting string to json obj
+             	$("#assign_course > option").remove();
+               	 $.each(obj, function() {
+                 	var opt = $('<option />'); // here we're creating a new select option with for each course
+                    	opt.val(this.id);
+                     opt.text(this.name);
+						$('#assign_course').append(opt);
+                 	// console.log(this.id+'='+this.name);
+                 	 
+                 	});
+               	var assigned_courses_val=$('#assign_course').val()  ; //get assigned course selected on selection of year
+               	if(assigned_courses_val>0){  
+               		ajax_call_topic(assigned_courses_val);
+               	}
+             	}
+             	else {
+             		$("#assign_course > option").remove();
+             		var opt = $('<option />'); 
+                    	opt.val('');
+                     opt.text('None');
+						$('#assign_course').append(opt);
+
+
+						$("#Topics > option").remove();
+	               		var opt = $('<option />'); 
+                    	opt.val('');
+                     	opt.text('None');
+						$('#Topics').append(opt);
+                 	}
+
+					
+             }
+              
+         });
+
+        }
+    function ajax_call_topic(assigned_courses_val){
+    	$.ajax({
+             type: "POST",
+             url: "<?php echo site_url('admin/course_lectures/get_topic_by_assignedcourseid'); ?>",
+             data: {assign_course_id: assigned_courses_val}, //here we are calling our user controller and passing year id to get courses accordingly
+				success: function(json) //we're calling the response json array 
+             {   
+	              //  alert('<pre>'+json+'</pre>');
+             	if(json.length>0){ 
+                 obj = JSON.parse(json); //converting string to json obj
+             	$("#Topics > option").remove();
+               	 $.each(obj, function() {
+                 	var opt = $('<option />'); // here we're creating a new select option with for each course
+                    	opt.val(this.id);
+                     	opt.text(this.topic);
+						$('#Topics').append(opt);
+                 	// console.log(this.id+'='+this.name);
+                 	 
+                 	});
+               	   	
+             	}
+             	else{
+	               		$("#Topics > option").remove();
+	               		var opt = $('<option />'); 
+                   	opt.val('');
+                    opt.text('None');
+						$('#Topics').append(opt);
+
+	               	}
+             	 }
+             	});	
+
+        }
     </script>
     
 </head>

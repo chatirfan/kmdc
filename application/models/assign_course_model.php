@@ -95,7 +95,16 @@ class assign_Course_Model  extends CI_Model  {
         return $ret;
     }
 
+    function get_assigned_courses_by_year($post_array)
+    {
+    	$query=$this->db->query("SELECT a.id, c.name
+								FROM assign_course a
+								INNER JOIN courses c ON a.course_id = c.id
+								WHERE a.year_id={$post_array['year_id']}");
+    	$result=$query->result();
+    	if(!empty($result)){
+    		return json_encode($result);
+    	}
+    }
 }
-
-
 

@@ -23,7 +23,7 @@ class Course_lectures extends CI_Controller {
 		$this->load->model('Courses_Model','courses');
 		$this->load->model('Users_Model','users');
 		$this->load->model('course_Content_Model','content');
-		
+		$this->load->model('course_Lecture_Model','lectures');
 		$this->load->helper('common_helper');
 		
 		
@@ -68,7 +68,8 @@ GROUP BY course_name");
 			$crud->set_theme('flexigrid');
 			$crud->set_table('course_lectures');
 			$crud->set_subject('Course Lectures');
-						
+
+			$crud->required_fields('topic','topic_desc','lecture_date','day');
 			$crud->columns('assign_course_id','topic','topic_desc','lecture_date','created_by',
 							'created_on','day','uploaded_file','uploaded_audio','section_id','batch_year');
 			
@@ -173,6 +174,11 @@ GROUP BY course_name");
 	function get_course_by_batch_section(){
 		//print_r($post_array);
 	echo $this->courses->get_course_by_batch_section($_POST);
+	}
+	
+	function get_topic_by_assignedcourseid(){
+		
+		echo $this->lectures->get_topic_by_assignedcourseid($_POST);
 	}
 	
 

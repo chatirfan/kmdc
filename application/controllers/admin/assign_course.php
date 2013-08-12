@@ -216,7 +216,9 @@ class Assign_course extends CI_Controller {
 	
 	}
 	
-	
+	function get_assigned_courses_by_year(){
+		echo $this->assign->get_assigned_courses_by_year($_POST);
+	}
 
 	
 

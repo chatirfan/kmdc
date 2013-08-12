@@ -20,6 +20,7 @@ class Questions extends CI_Controller {
 		$this->load->model('Common_Model','common');
 		$this->load->model('Answers_Model','answers');
 		$this->load->model('Questions_Model','questions');
+		$this->load->model('assign_Course_Model','assigned');
 		
 		
 		if (!$this->ion_auth->logged_in())
@@ -57,7 +58,7 @@ class Questions extends CI_Controller {
 			$crud->set_theme('flexigrid');
 			$crud->set_table('questions');
 			$crud->set_subject('Questions');
-			//$crud->required_fields('type');
+			$crud->required_fields('lecture_id','question','type','reason');
 			
 			$crud->columns('lecture_id','question');
 			
@@ -70,7 +71,7 @@ class Questions extends CI_Controller {
 			
 			$crud->callback_field ( 'answers', array ( $this,'callback_add_answers' ) );//populating answers from
 			$crud->callback_field ( 'year', array ( $this->years,'get_years_dropdown' ) );
-			$crud->callback_field ( 'course', array ( $this->courses,'get_courses_dropdown' ) );
+			$crud->callback_field ( 'course', array ( $this->assigned,'get_assigned_course_dropdown' ) );
 			//$crud->callback_field ( 'tester', array ( $this,'tester' ) );
 			$crud->callback_edit_field( 'answers', array ( $this,'callback_edit_answers' ) );
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
