@@ -251,6 +251,7 @@
                     <ul class="inline-ul floatleft">
                         <li>Hello Admin</li>
                         <li><a href="#">Config</a></li>
+                        <li><a href="<?php echo site_url('forum') ?>"><span>Forum</span></a></li>
                         <li><a href="<?php echo site_url('authenticate/logout') ?>">Logout</a></li>
                     </ul>
                     <br />
@@ -283,9 +284,7 @@
              <li class="ic-gallery dd"><a href="<?php echo site_url('admin/assign_course/view') ?>"><span>Assign Course</span></a></li>
 		  <li class="ic-gallery dd"><a href="<?php echo site_url('admin/course_lectures/view') ?>"><span>Lectures</span></a></li>
 		  <li class="ic-gallery dd"><a href="<?php echo site_url('admin/questions/view') ?>"><span>Assesment</span></a></li>
-		  <li class="ic-gallery dd"><a href="<?php echo site_url('forum') ?>"><span>Forum</span></a></li>
-			
-             </ul>
+		     </ul>
     </div>
 
 

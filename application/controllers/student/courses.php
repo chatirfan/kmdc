@@ -43,8 +43,8 @@ class Courses extends CI_Controller {
         $this->load->view('student/master', array('studentInfo' => $studentInfo , 'content'=> $content));
     }
 
-    function list_all($year,$section){
-        $courseList = $this->courses->get_all_courses($year,$section);
+    function list_all($year,$section,$student_id){
+        $courseList = $this->courses->get_all_courses($year,$section,$student_id);
 
         $this->load->view('student/courselist',array('list'=> $courseList));
     }

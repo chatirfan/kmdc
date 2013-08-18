@@ -20,14 +20,6 @@
                     "<tr><td>Section: </td><td>". $item['section']."</td></tr>".
                     "<tr><td>Detail:    </td><td>". anchor('student/courses/view/'. $item['id'] , 'click here')."</td></tr>".
                     "<table>";
-//            $html.= "<div> ".
-//                    "Code: ". $item['code'].
-//                    "<br/>Course: ". $item['name'].
-//                    "<br/>Department: ". $item['department'].
-//                    "<br/>Description: ". $item['description'].
-//                    "<br/>Year: ". $item['year'].
-//                    "<br/>Section: ". $item['section'].
-//                "</div><br/>";
         }
 
         echo $html;

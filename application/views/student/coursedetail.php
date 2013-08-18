@@ -8,7 +8,7 @@
  */
 
 ?>
-<div class="floatleft" style="width:640px;">
+<div class="floatleft" style="width:635px;">
 <h3>Course Detail</h3>
     <?php
         $html =  "";

@@ -86,11 +86,13 @@ class assign_Course_Model  extends CI_Model  {
 
     function get_assigned_course($course_id)
     {
+
         $query=$this->db->query("SELECT a.*, t.*
                                 FROM assign_course a
-                                INNER JOIN user_teacher as t on t.user_id = a.assigned_to
+                                INNER JOIN user_teacher as t on t.id = a.assigned_to
                                 WHERE a.batch_year = ? and a.course_id = ? and a.status =1
                                 ORDER BY a.id DESC", array(date('Y'),$course_id));
+
         $ret = $query->result_array();
         return $ret;
     }
