@@ -8,8 +8,12 @@
  */
 
 ?>
+<style>
+    table {width: 100%;}
+</style>
+
 <div class="floatleft" style="width:635px;">
-<h3>Course Detail</h3>
+<h3>Course</h3>
     <?php
         $html =  "";
             $html .= "<table>".
@@ -41,3 +45,17 @@
         ?>
     </div>
 </div>
+<div class="floatleft" style="width:635px;">
+    <h3>Lectures</h3>
+    <?php
+    $html = "<table>".
+        "<tr><td>Topic</td><td>Topic Desc</td><td>Lecture Date</td><td>PPT</td><td>Audio</td></tr>";
+    foreach($lectures as $lecture) {
+           $html .= "<tr><td>". $lecture->topic ."</td><td>". $lecture->topic_desc ."</td><td>". $lecture->lecture_date ."</td><td>". $lecture->uploaded_file ."</td><td>". $lecture->uploaded_audio ."</td></tr>";
+    }
+    $html .= "</table>";
+
+    echo $html;
+    ?>
+</div>
+

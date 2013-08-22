@@ -52,7 +52,7 @@ class Courses_Model  extends CI_Model  {
 
     function get_all_courses($year, $section, $student_id)
     {
-        $query = $this->db->query('SELECT s.*,y.year,sec.section,d.name as department FROM student_course sc
+        $query = $this->db->query('SELECT s.*,ac.id as assign_course_id, y.year,sec.section,d.name as department FROM student_course sc
                                     INNER JOIN assign_course ac on ac.id = sc.assign_course_id
                                     INNER JOIN courses s on s.id = ac.course_id
                                     INNER JOIN years y on y.id = s.year_id
