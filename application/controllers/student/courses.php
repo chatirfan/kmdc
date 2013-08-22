@@ -40,7 +40,16 @@ class Courses extends CI_Controller {
         // Pass to the master view
         $content = $this->load->view('student/course', array('year' => $year_dropdown), true);
 
-        $this->load->view('student/master', array('studentInfo' => $studentInfo , 'content'=> $content));
+        $data = array();
+        $header = array();
+        $footer = array();
+        $header['user'] = $user;
+        $data['header'] = $header; 
+        $data['footer'] = $footer;
+        $data['content'] = $content;
+        $data['studentInfo'] = $studentInfo;
+
+        $this->load->view('student/master', $data);
     }
 
     function list_all($year,$section,$student_id){
@@ -79,7 +88,16 @@ class Courses extends CI_Controller {
 
         $content = $this->load->view('student/coursedetail', array('course' => $course, 'course_assignments'=> $courseAssignments, 'lectures' => $lectures), true);
 
-        $this->load->view('student/master', array('studentInfo' => $studentInfo , 'content'=> $content));
+        $data = array();
+        $header = array();
+        $footer = array();
+        $header['user'] = $user;
+        $data['header'] = $header; 
+        $data['footer'] = $footer;
+        $data['content'] = $content;
+        $data['studentInfo'] = $studentInfo;        
+        
+        $this->load->view('student/master', $data);
     }
 
 
