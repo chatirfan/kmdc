@@ -1,9 +1,0 @@
-diff a/application/views/student/master.php b/application/views/student/master.php	(rejected hunks)
-@@ -85,6 +85,7 @@
-             <?php echo $content; ?>
-         </div>
-         <div class="floatleft" style="width: 25%;height:100%; background-color: #e6e6fa;">
-+            <?php //echo $rightBar; ?>
-         </div>
-     </div>
-     <div class="clear">

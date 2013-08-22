@@ -8,6 +8,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('/css/grid.css')?>" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('/css/layout.css')?>" media="screen" />
     <link rel="stylesheet" type="text/css" href="<?php echo site_url('/css/nav.css')?>" media="screen" />
+    <link rel="stylesheet" type="text/css" href="<?php echo site_url('/assets/grocery_crud/themes/flexigrid/css/flexigrid.css')?>" media="screen" />
+    
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo site_url('/css/flexigrid.css')?>" media="screen" /> -->
+    
     <!--[if IE 6]><link rel="stylesheet" type="text/css" href="<?php echo site_url('/css/ie6.css')?>" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" type="text/css" href="<?php echo site_url('/css/ie.css')?>" media="screen" /><![endif]-->
     <!-- BEGIN: load jquery -->

@@ -39,7 +39,7 @@ class Authenticate extends CI_Controller {
 			if ($this->ion_auth->in_group(3))
 			{	//die('3');
 				$this->session->set_flashdata('Welcome');
-				ci_redirect('teachers/index');
+				ci_redirect('teacher/dashboard');
 			}
 
 			//ci_redirect to student login page if group id 2
@@ -770,13 +770,14 @@ class Authenticate extends CI_Controller {
 		}
 	}
 
-	 function _render_page($view, $data=null, $render=false)
+	 function _render_page($view, $data=null, $render=true)
 	{
 
 		$this->viewdata = (empty($data)) ? $this->data: $data;
 
 		$view_html = $this->load->view($view, $this->viewdata, $render);
-
+		$is_logged_in= ($this->ion_auth->logged_in())? true : false ;
+		$this->load->view('master', array('content' => $view_html,'is_logged_in'=>$is_logged_in));  // @custom loadind ion auth view to out master
 		if (!$render) return $view_html;
 	}
 
