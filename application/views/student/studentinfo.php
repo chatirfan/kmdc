@@ -3,8 +3,11 @@
         <table>
             <tr>
                 <td>Batch</td>
+
                 <td><?php echo $student['batch_year'];?>
                     <input type="hidden" id="batch_year" value="<?php echo $student['batch_year'];?>">
+                    <input type="hidden" id="student_id" value="<?php echo $student['id'];?>">
+
                 </td>
             </tr>
             <tr>

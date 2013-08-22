@@ -13,7 +13,7 @@ class Dashboard extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('grocery_CRUD');
 		$this->load->library('ion_auth');
-		$this->load->library('Phpbb_bridge');
+		//$this->load->library('Phpbb_bridge');
         $this->load->helper('common_helper');
         $this->load->model('Sections_Model','sections');
 		$this->load->model('Years_Model','years');
@@ -36,8 +36,17 @@ class Dashboard extends CI_Controller {
 
         $student =  $this->students->get_student_row_by_userid($user->id);
         $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
+        
+        $data = array();
+        $header = array();
+        $footer = array();
+        $header['user'] = $user;
+        $data['header'] = $header; 
+        $data['footer'] = $footer;
+        $data['content'] = '';
+        $data['studentInfo'] = $studentInfo;
         // Pass to the master view
-        $this->load->view('student/master', array('studentInfo' => $studentInfo));
+        $this->load->view('student/master', $data);
 	}
 
 
@@ -48,7 +57,17 @@ class Dashboard extends CI_Controller {
         $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
         // Pass to the master view
         $content = $this->load->view('student/schedule', array(),true);
-        $this->load->view('student/master', array('studentInfo' => $studentInfo, 'content' => $content));
+        
+        $data = array();
+        $header = array();
+        $footer = array();
+        $header['user'] = $user;
+        $data['header'] = $header; 
+        $data['footer'] = $footer;
+        $data['content'] = $content;
+        $data['studentInfo'] = $studentInfo;
+        
+        $this->load->view('student/master', $data);
     }
 
     function get_schedule(){
@@ -120,7 +139,17 @@ class Dashboard extends CI_Controller {
         $notifications = $this->notifications->get_notifications($student['section_id'],$student['year_id']);
 
         $content = $this->load->view('student/noticeboard',array('notifications'=>$notifications),true);
-        $this->load->view('student/master', array('studentInfo' => $studentInfo, 'content' => $content));
+        
+        $data = array();
+        $header = array();
+        $footer = array();
+        $header['user'] = $user;
+        $data['header'] = $header; 
+        $data['footer'] = $footer;
+        $data['content'] = $content;
+        $data['studentInfo'] = $studentInfo;
+        
+        $this->load->view('student/master', $data);
     }
 
 }

@@ -44,7 +44,15 @@ class course_Lecture_Model  extends CI_Model  {
     	if(!empty($result)){
     		return json_encode($result);
     	}
-    
+    }
+
+    function get_all_lectures($assign_course_id){
+        $query = $this->db->get_where('course_lectures', array('assign_course_id' => $assign_course_id));
+        $result=$query->result();
+        if(!empty($result)){
+            return $result;
+        }else
+            return null;
     }
   
    

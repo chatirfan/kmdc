@@ -67,6 +67,13 @@ INSERT INTO `assign_course` (`id`, `course_id`, `assigned_by`, `assigned_to`, `c
 
 -- --------------------------------------------------------
 
+CREATE TABLE  `kmdc`.`assign_course_teacher` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`assign_course_id` INT NOT NULL ,
+`teacher_id` INT NOT NULL
+) ENGINE = INNODB;
+
+
 --
 -- Table structure for table `content`
 --

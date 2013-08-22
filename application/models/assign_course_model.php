@@ -72,18 +72,43 @@ class assign_Course_Model  extends CI_Model  {
     	}
     }
     
-    function get_assigned_course_by_id($course_id)
+    function get_assigned_course_by_id($id)
     {
     	$query=$this->db->query("SELECT a.id, c.name
 								FROM assign_course a
 								INNER JOIN courses c ON a.course_id = c.id
-								WHERE a.id={$course_id};");
+								WHERE a.id={$id};");
     	$result=$query->result();
     	if(!empty($result)){
     		return $result[0]->name;
     	}
     }
-    
+
+    function get_assign_course_by_id($id){
+        $query=$this->db->query("SELECT a.*
+								FROM assign_course a
+								WHERE a.id={$id};");
+        $result=$query->result();
+        if($result)
+            return $result[0];
+        else
+            return null;
+    }
+
+    function get_course_teachers($assign_course_id)
+    {
+
+        $query=$this->db->query("SELECT t.*
+                                FROM assign_course a
+                                INNER JOIN assign_course_teacher as act on a.id = act.assign_course_id
+                                INNER JOIN user_teacher as t on t.id = act.teacher_id
+                                WHERE a.id = ? and a.status =1
+                                ORDER BY a.id DESC", array($assign_course_id));
+
+        $ret = $query->result_array();
+        return $ret;
+    }
+
     function get_assigned_courses_by_year($post_array)
     {
     	$query=$this->db->query("SELECT a.id, c.name
@@ -94,13 +119,6 @@ class assign_Course_Model  extends CI_Model  {
     	if(!empty($result)){
     		return json_encode($result);
     	}
-    	 
-    
-		
+    }
 }
-}
-/*
- $SQL_QUERY= */
-
-
 

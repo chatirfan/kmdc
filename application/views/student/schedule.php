@@ -49,7 +49,7 @@
 </script>
 <style>
     #calendar {
-        width: 700px;
+        /*width: 700px;*/
         /*margin: 0 auto;*/
         text-align: center;
         font-size: 13px;

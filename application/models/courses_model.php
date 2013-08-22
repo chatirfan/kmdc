@@ -26,7 +26,20 @@ class Courses_Model  extends CI_Model  {
 		
 		return form_dropdown('course_id', $arrCourses,$value,'id="courses"');
     }
-    
+
+    function get_course($id)
+    {
+        $query = $this->db->query('SELECT s.*,y.year,sc.section,d.name as department FROM courses s
+                                    INNER JOIN years y on y.id = s.year_id
+                                    INNER JOIN sections sc on sc.id = s.section_id
+                                    INNER JOIN departments d on d.id = s.department_id
+                                    WHERE s.id = ? ',array($id));
+        $result=$query->result();
+        if(!empty($result)){
+            return $result[0];
+        }else
+            return null;
+    }
     
     function get_course_by_id($course_id)
     {
@@ -37,13 +50,15 @@ class Courses_Model  extends CI_Model  {
     	}
     }
 
-    function get_all_courses($year, $section)
+    function get_all_courses($year, $section, $student_id)
     {
-        $query = $this->db->query('SELECT s.*,y.year,sc.section,d.name as department FROM courses s
+        $query = $this->db->query('SELECT s.*,ac.id as assign_course_id, y.year,sec.section,d.name as department FROM student_course sc
+                                    INNER JOIN assign_course ac on ac.id = sc.assign_course_id
+                                    INNER JOIN courses s on s.id = ac.course_id
                                     INNER JOIN years y on y.id = s.year_id
-                                    INNER JOIN sections sc on sc.id = s.section_id
+                                    INNER JOIN sections sec on sec.id = s.section_id
                                     INNER JOIN departments d on d.id = s.department_id
-                                    WHERE s.year_id = ? AND s.section_id = ?', array($year,$section));
+                                    WHERE ac.year_id = ? AND ac.section_id = ? AND sc.student_id = ? ', array($year,$section, $student_id));
 
         $ret = $query->result_array();
         return $ret;
@@ -78,6 +93,7 @@ class Courses_Model  extends CI_Model  {
     }
      
     }
+
 
 }   
     
