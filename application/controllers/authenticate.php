@@ -8,7 +8,7 @@ class Authenticate extends CI_Controller {
 		$this->load->library('ion_auth');
 		$this->load->library('form_validation');
 		$this->load->helper('url');
-		$this->load->library('phpbb_bridge');
+		//$this->load->library('phpbb_bridge');
 		// Load MongoDB library instead of native db driver if required
 		//$this->config->item('use_mongodb', 'ion_auth') ?
 		//$this->load->library('mongo_db') :
@@ -103,7 +103,7 @@ class Authenticate extends CI_Controller {
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
 			{
 				/*auto login to forums phpbb when loggin in to system is successfull*/
-				$this->phpbb_bridge->user_login($this->input->post('identity'),$this->input->post('password'));
+				//$this->phpbb_bridge->user_login($this->input->post('identity'),$this->input->post('password'));
 				
 				//if the login is successful
 				//ci_redirect them back to the home page
@@ -147,7 +147,7 @@ class Authenticate extends CI_Controller {
 		$logout = $this->ion_auth->logout();
 
 		//logout of forums 
-		$this->phpbb_bridge->user_logout();
+		//$this->phpbb_bridge->user_logout();
 		
 		//ci_redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());

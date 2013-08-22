@@ -1,4 +1,5 @@
-<h1><?php echo lang('login_heading');?></h1>
+<?php $this->load->view('header');?>
+<!--<h1><?php echo lang('login_heading');?></h1>
 <p><?php echo lang('login_subheading');?></p>
 
 <div id="infoMessage"><?php echo $message;?></div>
@@ -25,4 +26,6 @@
 
 <?php echo form_close();?>
 
-<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
+<p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>-->
+<?php $this->load->view('signin');?>
+<?php $this->load->view('footer');?>
