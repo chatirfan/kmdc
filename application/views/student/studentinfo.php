@@ -1,5 +1,6 @@
-<div class="box">
-        <h2>Student Profile</h2>
+
+<div class="featured-jobs">
+        <h1>Student Profile</h1>
         <table>
             <tr>
                 <td>Batch</td>
@@ -40,8 +41,8 @@
             </tr>
         </table>
     </div>
-<div class="box">
-    <h2>To do List</h2>
+<div class="featured-jobs" style="margin-top:10px;">
+    <h1>To do List</h1>
     <ul>
         <li><a href='' >Course Syllabus</a></li>
         <li><a href='' >Assignments</a></li>
