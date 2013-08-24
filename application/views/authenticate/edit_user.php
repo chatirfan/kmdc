@@ -1,40 +1,79 @@
-<h1><?php echo lang('edit_user_heading');?></h1>
-<p><?php echo lang('edit_user_subheading');?></p>
-
 <div id="infoMessage"><?php echo $message;?></div>
+<div style="width: 100%;" class="flexigrid crud-form">	
+<div class="mDiv">
+		<div class="ftitle">
+			<div class="ftitle-left">
+				<?php echo lang('edit_user_heading');?>		</div>			
+			<div class="clear"></div>
+		</div>
+		
+	</div>
 
+<div id="main-table-box">
 <?php echo form_open(uri_string());?>
 
-      <p>
-            <?php echo lang('edit_user_fname_label', 'first_name');?> <br />
+<div class="form-div">
+      <div  class="form-field-box even">
+			<div  class="form-display-as-box">      
+            <?php echo lang('edit_user_fname_label', 'first_name');?> 
+            </div>
+            <div class="form-input-box">
             <?php echo form_input($first_name);?>
-      </p>
-
-      <p>
-            <?php echo lang('edit_user_lname_label', 'last_name');?> <br />
+            </div>
+      </div>
+      
+      <div class="form-field-box odd">
+			<div  class="form-display-as-box"> 
+             <?php echo lang('edit_user_lname_label', 'last_name');?>
+            </div>
+            <div  class="form-input-box">
             <?php echo form_input($last_name);?>
-      </p>
+            </div>
+      </div>
+      
+      
 
-      <p>
-            <?php echo lang('edit_user_company_label', 'company');?> <br />
+      <div class="form-field-box even">
+			<div  class="form-display-as-box"> 
+            <?php echo lang('create_user_company_label', 'company');?> 
+             </div>
+            <div  class="form-input-box">
             <?php echo form_input($company);?>
+      		</div>
+      </div>
+      
+    
+       <div class="form-field-box odd">
+			<div  class="form-display-as-box"> 
+            <?php echo lang('edit_user_phone_label', 'phone');?>
+             </div>
+            <div  class="form-input-box">
+           <?php echo form_input($phone);?>
+      		</div>
+      </div>
+      <p>
+             <br />
+            
       </p>
 
-      <p>
-            <?php echo lang('edit_user_phone_label', 'phone');?> <br />
-            <?php echo form_input($phone);?>
-      </p>
-
-      <p>
-            <?php echo lang('edit_user_password_label', 'password');?> <br />
+       <div class="form-field-box even">
+			<div  class="form-display-as-box"> 
+           <?php echo lang('edit_user_password_label', 'password');?>
+             </div>
+            <div  class="form-input-box">
             <?php echo form_input($password);?>
-      </p>
-
-      <p>
-            <?php echo lang('edit_user_password_confirm_label', 'password_confirm');?><br />
+      		</div>
+      </div>
+     
+       <div class="form-field-box odd">
+			<div  class="form-display-as-box"> 
+        <?php echo lang('edit_user_password_confirm_label', 'password_confirm');?>
+             </div>
+            <div  class="form-input-box">
             <?php echo form_input($password_confirm);?>
-      </p>
-
+      		</div>
+      </div>
+      
 	 <h3><?php echo lang('edit_user_groups_heading');?></h3>
 	<?php foreach ($groups as $group):?>
 	<label class="checkbox">
@@ -57,6 +96,12 @@
       <?php echo form_hidden('id', $user->id);?>
       <?php echo form_hidden($csrf); ?>
 
-      <p><?php echo form_submit('submit', lang('edit_user_submit_btn'));?></p>
+      <?php if($message!=null) {?><div class="report-div error" id="report-error" style="display: block;"><?php echo $message; ?></div> <?php }?>
+</div>
 
+<div class="pDiv">	
+      <div class="form-button-box"><?php echo form_submit('submit', lang('edit_user_submit_btn'),'class = "btn"');?></div>
+     </div> 
 <?php echo form_close();?>
+</div>
+</div>
