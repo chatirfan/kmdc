@@ -4,8 +4,6 @@ class Dashboard extends CI_Controller {
 
 	function __construct()
 	{   
-		
-		
 		parent::__construct();
 
 		$this->load->database();
@@ -22,12 +20,10 @@ class Dashboard extends CI_Controller {
         $this->load->model('Schedules_Model','schedules');
         $this->load->model('Notification_Board_Model','notifications');
 
-
         if (!$this->ion_auth->logged_in())
 		{
 			ci_redirect('authenticate/login');
 		}
-
 	}
 
 	function index()
@@ -150,6 +146,18 @@ class Dashboard extends CI_Controller {
         $data['studentInfo'] = $studentInfo;
         
         $this->load->view('student/master', $data);
+    }
+
+    function assestment(){
+
+    }
+
+    function profile(){
+
+        if($_POST['profile']){
+
+        }
+
     }
 
 }

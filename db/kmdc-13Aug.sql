@@ -65,14 +65,15 @@ INSERT INTO `assign_course` (`id`, `course_id`, `assigned_by`, `assigned_to`, `c
 (17, 17, 1, 21, '2013-08-03 11:25:27', 2, 1, '2013', '0000-00-00 00:00:00', 0, 1),
 (18, 14, 1, 21, '2013-08-03 12:47:48', 1, 1, '2013', '0000-00-00 00:00:00', 0, 1);
 
--- --------------------------------------------------------
+--
+-- TABLE assign_course_teacher
+--
 
-CREATE TABLE  `kmdc`.`assign_course_teacher` (
+CREATE TABLE IF NOT EXISTS `assign_course_teacher` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `assign_course_id` INT NOT NULL ,
 `teacher_id` INT NOT NULL
 ) ENGINE = INNODB;
-
 
 --
 -- Table structure for table `content`
@@ -594,3 +595,6 @@ ALTER TABLE `users_groups`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+ALTER TABLE `user_question_attempts` CHANGE `user_id` `student_id` INT(11) NOT NULL;
