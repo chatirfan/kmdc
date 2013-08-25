@@ -11,11 +11,19 @@ class assign_Course_Model  extends CI_Model  {
     
    
    //checks for duplicate entries in db return 1 if exist else 0
-    function check_duplicate($data)
-    {
+    function check_duplicate($data,$teacher_id,$assign_course_id)
+    {	
+    	$data2 = array(
+    				'teacher_id' => $teacher_id,
+    				'assign_course_id' => $assign_course_id
+    		);
+    	$query2 = $this->db->get_where('assign_course_teacher',$data2);
+    	$result2=$query2->result();
+    	
+    	$query = $this->db->get_where('assign_course',$data);
     	$query = $this->db->get_where('assign_course',$data);
     	$result=$query->result();
-    	return (empty($result)) ? 0 : 1;
+    	return (empty($result)|| empty($result2)) ? 0 : 1;
     }
     
     ////if items above in $data are peresent in assign_course insert student and assign_course id to student_course
