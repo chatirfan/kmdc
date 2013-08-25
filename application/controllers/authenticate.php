@@ -88,6 +88,7 @@ class Authenticate extends CI_Controller {
 	//log the user in
 	function login()
 	{
+		if($this->ion_auth->logged_in()){ci_redirect('admin/dashboard'); }
 		$this->data['title'] = "Login";
 
 		//validate form input
@@ -772,7 +773,7 @@ class Authenticate extends CI_Controller {
 
 	 function _render_page($view, $data=null, $render=true)
 	{
-
+		
 		$this->viewdata = (empty($data)) ? $this->data: $data;
 
 		$view_html = $this->load->view($view, $this->viewdata, $render);
