@@ -22,6 +22,7 @@ class Assign_course extends CI_Controller {
 		$this->load->model('Students_Model','students');
 		$this->load->model('Courses_Model','courses');
 		$this->load->model('Users_Model','users');
+		$this->load->model('assign_course_Teacher_Model','assign_course_teacher');
 		$this->load->helper('common_helper');
 		
 		
@@ -45,7 +46,10 @@ class Assign_course extends CI_Controller {
 	function index()
 	{
 	
-		//pr($query->result()); die;
+		$teacher_id= $this->assign_course_teacher->get_teacher_by_assign_course_id(16,'id');
+		
+		$this->pr($teacher_id);
+		die;
 		 //test_method('Hello World');
 		//$this->_example_output((object)array('output' => '' , 'js_files' => array() , 'css_files' => array()));
 	}
@@ -64,7 +68,9 @@ class Assign_course extends CI_Controller {
 			$crud->set_table('assign_course');
 			$crud->set_subject('Assign Course');
 						
-			$crud->columns('course_id','assigned_by','assigned_to','year_id','section_id','batch_year','status');
+			$crud->columns('assigned_to','course_id','assigned_by','year_id','section_id','batch_year','status');
+			
+			//$id = $crud->getStateInfo();
 			
 			/*Generating dropdwons for year section and course status*/
 			$crud->callback_add_field('status',array($this->common,'status_dropdown'));
@@ -80,7 +86,7 @@ class Assign_course extends CI_Controller {
 			$crud->callback_edit_field('section_id',array($this->sections,'get_sections_dropdown'));
 			$crud->callback_edit_field('year_id',array($this->years,'get_years_dropdown'));
 			$crud->callback_edit_field('course_id',array($this->courses,'get_courses_dropdown'));
-			$crud->callback_edit_field('assigned_to',array($this->teachers,'get_teachers_dropdown'));
+			$crud->callback_edit_field('assigned_to',array($this,'get_teachers_dropdown'));
 			$crud->callback_edit_field('batch_year',array($this->common,'get_batch_years_dropdown'));
 			//insertion of created_by not present in form whilst updation
 			$crud->callback_before_update(array($this,'call_before_update'));
@@ -97,10 +103,10 @@ class Assign_course extends CI_Controller {
 			$crud->callback_column('status',array($this->common,'_status'));
 			$crud->callback_column('section_id',array($this->sections,'get_section_by_id'));
 			$crud->callback_column('year_id',array($this->years,'get_year_by_id'));
-			$crud->callback_column('assigned_to',array($this->teachers,'get_teacher_by_id'));
+			//$crud->callback_column('assigned_to',array($this->teachers,'get_teacher_by_id'));
 			$crud->callback_column('course_id',array($this->courses,'get_course_by_id'));
 			$crud->callback_column('assigned_by',array($this->users,'get_user_by_id'));
-   			
+			$crud->callback_column('assigned_to',array($this,'get_teacher_by_assign_course_id'));
 			/*used to display fields when adding items*/
 			$crud->fields('course_id','assigned_by','assigned_to','year_id','section_id','batch_year','status');
 			
@@ -111,6 +117,7 @@ class Assign_course extends CI_Controller {
 			$crud->display_as('course_id','Course');
 		//$crud->display_as('assigned_by','Assignee');
 			$crud->display_as('assigned_to','Teacher');
+			
 			$crud->display_as('section_id','Section');
 			$crud->display_as('year_id','Year');
 			$crud->display_as('batch_year','Batch');
@@ -120,6 +127,10 @@ class Assign_course extends CI_Controller {
 			//die;
 			$crud->set_rules('batch_year','Batch Year','numeric|required');
 			$crud->set_rules('course_id', 'Course id', 'callback_check_duplicate');
+			
+			
+			
+			
 			
 			$output = $crud->render();
 			//$this->pr($output);
@@ -147,7 +158,9 @@ class Assign_course extends CI_Controller {
 	}
 	
 	function call_after_insert($post_array,$assign_course_id){
-	
+			
+		//returns 0 if inserted else return 1 
+		$this->assign_course_teacher->insert($post_array,$assign_course_id);
 		//return 1 if failure 0 if success	2 if alredy present
 		if($this->students->bulk_insert_student_course($post_array,$assign_course_id)==0){
 		
@@ -158,7 +171,7 @@ class Assign_course extends CI_Controller {
 	
 	function call_before_update($post_array,$assign_course_id){
 		//chek if year /section or batch is changed whilst update
-		$this->pr($assign_course_id); 
+		//$this->pr($assign_course_id); 
 		$data=array();
 		$data['id']=$assign_course_id;
 		$data['year_id']=$this->input->post('year_id');
@@ -176,31 +189,37 @@ class Assign_course extends CI_Controller {
 		$post_array['assigned_by']=$this->users->get_user_id();
 	
 		//drop down for teachers return teacher_id mapping it with field for this table
-		$post_array['assigned_to']=$post_array['teacher_id'];
+		//$post_array['assigned_to']=$post_array['teacher_id'];
 		return $post_array;
 	
 	
 	}
 	
 	function call_after_update($post_array,$assign_course_id){
-		$this->pr($post_array);
+		//$this->pr($post_array);
 		
 		if($post_array['is_changed']==0){
 		$this->students->bulk_insert_student_course($post_array,$assign_course_id);
 			}
+			
+			//returns 0 if inserted else return 1
+			$this->assign_course_teacher->update($post_array,$assign_course_id);
 	}
 	
-	function check_duplicate($str)
-	{
+	function check_duplicate($str,$row)
+	{ 
+		
 		$data=array();
 		$data['course_id']= $this->input->post('course_id');
-		$data['assigned_to'] = $this->input->post('teacher_id');
+		$teacher_id = $this->input->post('teacher_id');
+		$assign_course_id=$this->uri->segment(5);
 		$data['year_id']=$this->input->post('year_id');
 		$data['section_id']=$this->input->post('section_id');
 		$data['batch_year']=$this->input->post('batch_year');
+		$data['status']=$this->input->post('status');
 		
 		//checks for duplicate entries in db return 1 if exist else 0
-		if($this->assign->check_duplicate($data)==1){
+		if($this->assign->check_duplicate($data,$teacher_id,$assign_course_id)==1){
 			
 			$this->form_validation->set_message('check_duplicate','Cannot Insert a Duplicate Entry');
 			return false;
@@ -209,11 +228,21 @@ class Assign_course extends CI_Controller {
 			return true;
 		}
 		
-		
-		
-		
-		
+			
+	}
 	
+	function get_teacher_by_assign_course_id($value,$row){
+			
+		return $this->assign_course_teacher->get_teacher_by_assign_course_id($row->id,'name');
+		
+			
+	}
+	function get_teachers_dropdown($value,$row){
+		
+		//second param is the field to be retrived
+		$teacher_id= $this->assign_course_teacher->get_teacher_by_assign_course_id($row,'id');
+		
+		return $this->teachers->get_teachers_dropdown($teacher_id);
 	}
 	
 	function get_assigned_courses_by_year(){
