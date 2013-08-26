@@ -135,8 +135,10 @@ class Authenticate extends CI_Controller {
 				'type' => 'password',
 			);
 
-			$this->_render_page('authenticate/login', $this->data);
-		}
+			//$this->_render_page('authenticate/login', $this->data);
+            $this->load->view('authenticate/login', $this->data);
+
+        }
 	}
 
 	//log the user out
