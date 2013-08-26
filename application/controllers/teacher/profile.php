@@ -62,10 +62,8 @@ class Profile extends CI_Controller {
 			$crud->unset_print();
 			$crud->unset_export();
 			$crud->unset_delete();
-			
-			
+
 			$crud->required_fields('teacher_id','name','email','phone','qualification','institution','skills','designation');
-			
 			$crud->columns('teacher_id','name','email','phone','department_id','qualification','institution','skills','designation');
 			
 			/*used to display fields when adding items*/
@@ -74,7 +72,6 @@ class Profile extends CI_Controller {
 			/*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
 			$crud->change_field_type('user_id','invisible');
 			$crud->change_field_type('forum_id','invisible');
-			
 
 			$crud->callback_add_field('department_id',array($this->departments,'get_departments_dropdown'));
 			$crud->callback_edit_field('department_id',array($this->departments,'get_departments_dropdown'));
@@ -92,8 +89,7 @@ class Profile extends CI_Controller {
 			$crud->display_as('designation','Designation');
 			$crud->display_as('institution','Institution');
 			$crud->display_as('department_id','Department');
-			
-			
+
 			
 			//creating a user before creation of teacher
 			$crud->callback_before_insert(array($this,'call_before_insert'));

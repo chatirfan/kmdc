@@ -44,7 +44,9 @@ class Courses extends CI_Controller {
         $header = array();
         $footer = array();
         $header['user'] = $user;
-        $data['header'] = $header; 
+        $header['student_id'] = $student['id'];
+
+        $data['header'] = $header;
         $data['footer'] = $footer;
         $data['content'] = $content;
         $data['studentInfo'] = $studentInfo;
@@ -85,18 +87,21 @@ class Courses extends CI_Controller {
         $user = $this->ion_auth->user()->row();
         $student = $this->students->get_student_row_by_userid($user->id);
         $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
-
         $content = $this->load->view('student/coursedetail', array('course' => $course, 'course_assignments'=> $courseAssignments, 'lectures' => $lectures), true);
+        $course_teachers = $this->load->view('student/course_teachers',array('course' => $course, 'course_assignments'=> $courseAssignments),true);
 
         $data = array();
         $header = array();
         $footer = array();
         $header['user'] = $user;
-        $data['header'] = $header; 
+        $header['student_id'] = $student['id'];
+
+        $data['header'] = $header;
         $data['footer'] = $footer;
         $data['content'] = $content;
         $data['studentInfo'] = $studentInfo;        
-        
+        $data['right'] = $course_teachers;
+
         $this->load->view('student/master', $data);
     }
 

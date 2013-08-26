@@ -1,4 +1,3 @@
-
 <div class="featured-jobs">
         <h1>Student Profile</h1>
         <table>

@@ -18,7 +18,6 @@
 <div class="top-bar">
 <div class="wrapper">
 
-
 <div class="top-profile-box">
 <div class="thumb"><img src="<?php echo asset_img("top-profile-img.jpg");?>" alt="image" /></div>
 <h1><?php echo ucfirst($user->first_name.' '.$user->last_name);?></h1>
@@ -30,10 +29,13 @@
 <li><a href="#" class="selected">Buyer of Services</a></li>
 <li class="btm-brd"><a href="#">Services Provider</a></li>-->
 
-<li class="btm-brd"><a href="<?php echo base_url();?>contact/advertise">Advertise</a></li>
-<li class="btm-brd"><a href="<?php //echo $profile_link;?>">Profile</a></li>
-<li class="btm-brd"><a href="<?php echo base_url();?>home/profile_edit">Account Setting</a></li>
-<li class="btm-brd"><a href="<?php echo base_url();?>home/dashboard">Dashboard</a></li>
+<!--<li class="btm-brd"><a href="--><?php //echo base_url();?><!--contact/advertise">Advertise</a></li>-->
+    <!--<li class="btm-brd"><a href="--><?php //echo base_url();?><!--home/profile_edit">Account Setting</a></li>-->
+
+
+
+<li class="btm-brd"><a href="<?php echo base_url();?>student/dashboard/profile/edit/<?php echo $header['student_id'];?>">Profile</a></li>
+<li class="btm-brd"><a href="<?php echo base_url();?>student/dashboard">Dashboard</a></li>
 
 <li><a href="<?php echo base_url();?>authenticate/logout">Logout</a></li>
 </ul>

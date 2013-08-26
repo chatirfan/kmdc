@@ -23,8 +23,10 @@
 <div class="right-col">
 
 <div class="featured-provider">
-<h1>Something here</h1>
-
+<?php if(isset($right)) echo $right;
+      else
+          echo "Advertise Here";
+    ?>
 </div>
 </div>
 <!-- Right Colum -->

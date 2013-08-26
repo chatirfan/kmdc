@@ -19,6 +19,7 @@ class Dashboard extends CI_Controller {
         $this->load->model('Groups_Model','groups');
         $this->load->model('Schedules_Model','schedules');
         $this->load->model('Notification_Board_Model','notifications');
+        $this->load->model('Common_Model','common');
 
         if (!$this->ion_auth->logged_in())
 		{
@@ -37,6 +38,8 @@ class Dashboard extends CI_Controller {
         $header = array();
         $footer = array();
         $header['user'] = $user;
+        $header['student_id'] = $student['id'];
+
         $data['header'] = $header; 
         $data['footer'] = $footer;
         $data['content'] = '';
@@ -58,7 +61,9 @@ class Dashboard extends CI_Controller {
         $header = array();
         $footer = array();
         $header['user'] = $user;
-        $data['header'] = $header; 
+        $header['student_id'] = $student['id'];
+
+        $data['header'] = $header;
         $data['footer'] = $footer;
         $data['content'] = $content;
         $data['studentInfo'] = $studentInfo;
@@ -140,6 +145,8 @@ class Dashboard extends CI_Controller {
         $header = array();
         $footer = array();
         $header['user'] = $user;
+        $header['student_id'] = $student['id'];
+
         $data['header'] = $header; 
         $data['footer'] = $footer;
         $data['content'] = $content;
@@ -152,12 +159,99 @@ class Dashboard extends CI_Controller {
 
     }
 
+
     function profile(){
 
-        if($_POST['profile']){
+        $user_id = $this->uri->segment(5);
+        $user = $this->ion_auth->user()->row();
+        $student = $this->students->get_student_row_by_userid($user->id);
+
+        if($student['id'] != $user_id){
+            ci_redirect('student/dashboard');
+        }
+
+        try{
+
+            $crud = new grocery_CRUD();
+
+            $crud->set_theme('flexigrid');
+            $crud->set_table('user_student');
+            $crud->set_subject('Update Profile');
+            $crud->unset_add();
+            $crud->unset_print();
+            $crud->unset_export();
+            $crud->unset_delete();
+            $crud->unset_back_to_list();
+            $crud->unset_list();
+
+            $crud->required_fields('student_id','name','email','father_name','address','religion','phone','gender','role_number','dob','phone_home','phone_father');
+
+            $crud->columns('student_id','name','email','father_name','address','religion','phone','role_number');
+
+            /*used to display fields when adding items*/
+            $crud->fields('user_id','name','student_id','forum_id','email','father_name','address','religion','gender','dob','phone','phone_home','phone_father','role_number');
+
+            /*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
+            $crud->change_field_type('user_id','invisible');
+            $crud->change_field_type('forum_id','invisible');
+
+            /*hidding a field for insertion via call_before_insert crud requires field to be present in Crud->fields*/
+            //$crud->change_field_type('created_by','invisible');
+
+            /*used to change names of the fields*/
+            $crud->display_as('student_id','Student Id');
+            $crud->display_as('name','Name');
+            $crud->display_as('email','Email');
+            $crud->display_as('father_name','Fathers Name');
+            $crud->display_as('address','Address');
+            $crud->display_as('religion','Religion');
+            $crud->display_as('role_number','Roll #');
+//            $crud->display_as('batch_year','Batch');
+//            $crud->display_as('section_id','Section');
+//            $crud->display_as('year_id','Year');
+
+
+            /*call back for edit form->passes value attribute with items value to the function*/
+            //$crud->callback_edit_field('section_id',array($this->sections,'get_sections_dropdown'));
+            //$crud->callback_edit_field('year_id',array($this->years,'get_years_dropdown'));
+            //$crud->callback_edit_field('batch_year',array($this->common,'get_batch_years_dropdown'));
+
+            $output = $crud->render();
+            //$this->pr($output);
+
+            $content = $this->load->view('student/profile.php',$output,true);
+            // Pass to the master view
+            //$this->load->view('admin/master', array('content' => $content));
+
+            $studentInfo = $this->load->view('student/studentinfo', array('student'=> $student), true);
+
+            $data = array();
+            $header = array();
+            $footer = array();
+            $header['user'] = $user;
+            $header['student_id'] = $student['id'];
+
+            $data['header'] = $header;
+            $data['footer'] = $footer;
+            $data['content'] = $content;
+            $data['studentInfo'] = $studentInfo;
+
+//            $crud->callback_after_update(array($this,'call_after_update'));
+
+            $this->load->view('student/master', $data);
+
+
+        }catch(Exception $e){
+            show_error($e->getMessage().' --- '.$e->getTraceAsString());
 
         }
 
     }
+
+//    function call_after_update(){
+//        echo 'here';
+//        ci_redirect('student/dashboard');
+//    }
+
 
 }
