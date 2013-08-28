@@ -1,19 +1,7 @@
-<?php
-/**
- * Created by JetBrains PhpStorm.
- * User: irfan
- * Date: 7/27/13
- * Time: 11:46 AM
- * To change this template use File | Settings | File Templates.
- */
-?>
-<h3>Courses</h3>
+<h1>Courses</h1>
+<div>Year: <?php echo  $year; ?></div>
 <div>
-    <div id="header">
-        <div>Year: <?php echo  $year; ?></div>
-        <br/>
-        <div id="courseList"></div>
-    </div>
+    <div id="courseList"></div>
 </div>
 
 <script type="text/javascript">

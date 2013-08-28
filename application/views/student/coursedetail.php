@@ -10,6 +10,8 @@
 ?>
 <style>
     table {width: 100%;}
+    #lecture {width: 100%; border: 1px solid black;border-collapse:collapse; }
+    #lecture td {border-collapse:collapse;width: 100%; border: 1px solid black; }
 </style>
 
 <div class="floatleft" style="width:635px;">
@@ -48,11 +50,18 @@
 <div class="floatleft" >
     <h3>Lectures</h3>
     <?php
-    $html = "<table border=1>".
-        "<tr><td>Topic</td><td>Topic Desc</td><td>Lecture Date</td><td>PPT</td><td>Audio</td></tr>";
-    foreach($lectures as $lecture) {
-           $html .= "<tr><td>". $lecture->topic ."</td><td>". $lecture->topic_desc ."</td><td>". $lecture->lecture_date ."</td><td>". $lecture->uploaded_file ."</td><td>". $lecture->uploaded_audio ."</td></tr>";
+
+    $html = "<table id='lecture'>".
+        "<tr><td style='width:200px'>Topic</td><td style='width:200px'>Description</td><td style='width:80px'>Lecture Date</td><td style='width:40px'>PPT</td><td style='width:40px'>Audio</td></tr>";
+
+    if(!empty($lecture)){
+        foreach($lectures as $lecture) {
+            $html .= "<tr><td style='width:200px'>". $lecture->topic ."</td><td style='width:200px'>". $lecture->topic_desc ."</td><td style='width:80px'>". $lecture->lecture_date ."</td><td style='width:40px'>". $lecture->uploaded_file ."</td><td style='width:40px'>". $lecture->uploaded_audio ."</td></tr>";
+        }
+    }else{
+            $html .= "<tr><td colspan='5'>No lectures uploaded</td></tr>";
     }
+
     $html .= "</table>";
 
     echo $html;

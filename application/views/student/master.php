@@ -22,7 +22,7 @@
 <!-- Right Colum -->
 <div class="right-col">
 
-<div class="featured-provider">
+<div class="featured-jobs">
 <?php if(isset($right)) echo $right;
       else
           echo "Advertise Here";

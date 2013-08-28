@@ -20,7 +20,7 @@
 
 <div class="top-profile-box">
 <div class="thumb"><img src="<?php echo asset_img("top-profile-img.jpg");?>" alt="image" /></div>
-<h1><?php echo ucfirst($user->first_name.' '.$user->last_name);?></h1>
+<h1><?php echo ucfirst($user->first_name);?></h1>
 <div class="top-set-icon" onclick="toogle_div();"><img src="<?php echo asset_img("setting-icon.jpg");?>" alt="setting" /></div>
 <div class="top-set-menu" id="branches" style="display:none;">
 <div class="tooltip-arrow"></div>

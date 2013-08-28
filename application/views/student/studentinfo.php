@@ -1,50 +1,39 @@
 <div class="featured-jobs">
         <h1>Student Profile</h1>
-        <table>
-            <tr>
-                <td>Batch</td>
-
-                <td><?php echo $student['batch_year'];?>
-                    <input type="hidden" id="batch_year" value="<?php echo $student['batch_year'];?>">
-                    <input type="hidden" id="student_id" value="<?php echo $student['id'];?>">
-
-                </td>
-            </tr>
-            <tr>
-                <td>Session</td>
-                <td><?php echo $student['year'];?>
-                    <input type="hidden" id="year_id" value="<?php echo $student['year_id'];?>">
-                </td>
-            </tr>
-            <tr>
-                <td>Section</td>
-                <td><?php echo trim($student['section']);?>
-                    <input type="hidden" id="section_id" value="<?php echo $student['section_id'];?>">
-                </td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td><?php echo $student['name'];?></td>
-            </tr>
-            <tr>
-                <td>Role Number</td>
-                <td><?php echo $student['role_number'];?></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><?php echo $student['email'];?></td>
-            </tr>
-            <tr>
-                <td>Date of Birth</td>
-                <td><?php echo $student['dob'];?></td>
-            </tr>
-        </table>
-    </div>
-<div class="featured-jobs" style="margin-top:10px;">
-    <h1>To do List</h1>
     <ul>
-        <li><a href='' >Course Syllabus</a></li>
-        <li><a href='' >Assignments</a></li>
-        <li><a href='' >Schedules</a></li>
+        <li>
+            <h1>Batch</h1>
+            <?php echo $student['batch_year'];?>
+            <input type="hidden" id="batch_year" value="<?php echo $student['batch_year'];?>">
+            <input type="hidden" id="student_id" value="<?php echo $student['id'];?>">
+        </li>
+        <li>
+            <h1>Session</h1>
+            <?php echo $student['year'];?>
+            <input type="hidden" id="year_id" value="<?php echo $student['year_id'];?>">
+        </li>
+        <li>
+            <h1>Section</h1>
+            <?php echo $student['section'];?>
+            <input type="hidden" id="section_id" value="<?php echo $student['section_id'];?>">
+        </li>
+        <li>
+            <h1>Name</h1>
+            <?php echo $student['name'];?>
+        </li>
+        <li>
+            <h1>Role #</h1>
+            <?php echo $student['role_number'];?>
+        </li>
+        <li>
+            <h1>Email</h1>
+            <?php echo $student['email'];?>
+        </li>
+        <li>
+            <h1>DOB</h1>
+            <?php echo $student['dob'];?>
+        </li>
     </ul>
-</div>
+    </div>
+
+

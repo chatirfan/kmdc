@@ -1,28 +1,17 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: irfan
- * Date: 7/27/13
- * Time: 1:08 PM
- * To change this template use File | Settings | File Templates.
- */
+$html =  "";
+foreach($list as $item){
+    $html .= '<div class="job-cat">
+                <ul>
+                <li>Code : '.$item['code'].'</li>
+                <li>Course : '.$item['name'].'</li>
+                <li>Department : '.$item['department'].'</li>
+                <li>Description : '.$item['description'].'</li>
+                <li>Year : '.$item['year'].'</li>
+                <li>Section : '.$item['section'].'</li>
+                <li>Detail : '.anchor('student/courses/view/'. $item['assign_course_id'] , 'click here').'</li>
+                </ul>
+            </div>';
+}
+echo $html;
 ?>
-<div>
-    <?php
-        $html =  "";
-        foreach($list as $item){
-            $html .= "<table>".
-                    "<tr><td>Code: </td><td>". $item['code']."</td></tr>".
-                    "<tr><td>Course:: </td><td> ". $item['name']."</td></tr>".
-                    "<tr><td>Department: </td><td>". $item['department']."</td></tr>".
-                    "<tr><td>Description: </td><td>". $item['description']."</td></tr>".
-                    "<tr><td>Year: </td><td>". $item['year']."</td></tr>".
-                    "<tr><td>Section: </td><td>". $item['section']."</td></tr>".
-                    "<tr><td>Detail:    </td><td>". anchor('student/courses/view/'. $item['assign_course_id'] , 'click here')."</td></tr>".
-                    "<table>";
-        }
-
-        echo $html;
-    ?>
-
-</div>

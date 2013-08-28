@@ -58,7 +58,7 @@ a{text-decoration:none;}
 .search-btn:hover{background:#038edf; cursor:pointer;}
 .header-txt{float:left; color:#fff; width:711px; text-align:center; font-size:24px; font-family: 'SegoeUIBold'; padding:10px 0;}
 
-.content{float:left; width:100%; padding:10px 0;}
+.content{float:left; width:100%; padding:10px 0; min-height: 500px;}
 .left-col{float:left; width:190px;}
 .mid-col{float:left; width:560px; margin:0 10px; padding-bottom:5px;}
 .right-col{float:left; width:190px;}
@@ -791,3 +791,9 @@ background:url(../img/check_radio_sheet.png) -38px top no-repeat; cursor:pointer
 .top-set-menu ul li.btm-brd{ border-bottom:#dfdfdf 1px solid;}
 .top-set-menu ul li.hd{padding:5px 10px 5px 15px;}
 .tooltip-arrow{background: url(../img/tooltip-arrow.png) no-repeat; width:17px; height:11px; position:absolute; top:-11px; right:17px;}
+
+.notice-title p{line-height:18px; margin:0; padding:0;font-size:1.1em;font-weight:bold;width: 64%;float:left;}
+.notice-date{ width: 35%; float:left;}
+.notice-body {width: 99%;}
+.notice-header {width: 99%;}
+.notice {width: 100%;overflow: hidden;}

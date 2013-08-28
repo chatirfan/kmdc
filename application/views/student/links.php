@@ -7,7 +7,7 @@
       <li>Courses</li>
       </a> <a href="<?php echo base_url().'student/dashboard/noticeboard';?>">
       <li>Notice Board</li>
-      </a> <a href="<?php echo base_url().'student/dashboard/assesment';?>">
+      </a> <a href="<?php //echo base_url().'student/dashboard/assesment';?>">
       <li>Assesments</li>
       </a> <a href="<?php echo base_url().'student/dashboard/schedule';?>">
       <li>Schedule</li>
