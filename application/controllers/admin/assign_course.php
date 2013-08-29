@@ -216,7 +216,7 @@ class Assign_course extends CI_Controller {
 		$data['year_id']=$this->input->post('year_id');
 		$data['section_id']=$this->input->post('section_id');
 		$data['batch_year']=$this->input->post('batch_year');
-		$data['status']=$this->input->post('status');
+		$data['status']=$this->input->post('status');  
 		
 		//checks for duplicate entries in db return 1 if exist else 0
 		if($this->assign->check_duplicate($data,$teacher_id,$assign_course_id)==1){
