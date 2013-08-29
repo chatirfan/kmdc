@@ -31,8 +31,7 @@
             },
             allDaySlot: false,
             defaultView:'agendaWeek',
-            weekends: false,
-/*            hiddenDays:[7],*/
+            hiddenDays:[0],
             editable: false,
             minTime: 8,
             maxTime: 18,
