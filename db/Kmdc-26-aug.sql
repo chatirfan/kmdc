@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS `assign_course` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `course_id` int(11) NOT NULL,
   `assigned_by` int(11) NOT NULL,
-  `assigned_tooo` int(11) DEFAULT '1',
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `year_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL,
@@ -60,11 +59,11 @@ CREATE TABLE IF NOT EXISTS `assign_course` (
 -- Dumping data for table `assign_course`
 --
 
-INSERT INTO `assign_course` (`id`, `course_id`, `assigned_by`, `assigned_tooo`, `created_on`, `year_id`, `section_id`, `batch_year`, `modified_on`, `is_locked`, `status`) VALUES
-(16, 12, 1, 20, '2013-08-25 05:06:22', 1, 2, '2011', '0000-00-00 00:00:00', 0, 1),
-(17, 17, 1, 21, '2013-08-03 11:25:27', 2, 1, '2013', '0000-00-00 00:00:00', 0, 1),
-(18, 12, 1, 21, '2013-08-25 05:11:07', 1, 1, '2014', '0000-00-00 00:00:00', 0, 1),
-(19, 12, 1, 22, '2013-08-25 04:24:57', 2, 1, '2013', '0000-00-00 00:00:00', 0, 1);
+INSERT INTO `assign_course` (`id`, `course_id`, `assigned_by`, `created_on`, `year_id`, `section_id`, `batch_year`, `modified_on`, `is_locked`, `status`) VALUES
+(16, 12, 1, 20, '2013-08-25 05:06:22', 1,  '2011', '0000-00-00 00:00:00', 0, 1),
+(17, 17, 1, 21, '2013-08-03 11:25:27', 2,  '2013', '0000-00-00 00:00:00', 0, 1),
+(18, 12, 1, 21, '2013-08-25 05:11:07', 1,  '2014', '0000-00-00 00:00:00', 0, 1),
+(19, 12, 1, 22, '2013-08-25 04:24:57', 2,  '2013', '0000-00-00 00:00:00', 0, 1);
 
 -- --------------------------------------------------------
 

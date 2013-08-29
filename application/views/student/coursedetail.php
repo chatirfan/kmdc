@@ -54,9 +54,18 @@
     $html = "<table id='lecture'>".
         "<tr><td style='width:200px'>Topic</td><td style='width:200px'>Description</td><td style='width:80px'>Lecture Date</td><td style='width:40px'>PPT</td><td style='width:40px'>Audio</td></tr>";
 
-    if(!empty($lecture)){
+    if(!empty($lectures)){
         foreach($lectures as $lecture) {
-            $html .= "<tr><td style='width:200px'>". $lecture->topic ."</td><td style='width:200px'>". $lecture->topic_desc ."</td><td style='width:80px'>". $lecture->lecture_date ."</td><td style='width:40px'>". $lecture->uploaded_file ."</td><td style='width:40px'>". $lecture->uploaded_audio ."</td></tr>";
+            $lec_file = "";
+            if(!empty($lecture->uploaded_file)) {
+                $lec_file = "<a href='".site_url(UPLOAD_LECTURES_FILE.'/'. $lecture->uploaded_file)."'>". $lecture->uploaded_file ."</a>";
+            }
+            $lec_audiofile = "";
+            if(!empty($lecture->uploaded_audio)){
+                $lec_audiofile = "<a href='".site_url(UPLOAD_LECTURES_AUDIO.'/'. $lecture->uploaded_audio)."'>". $lecture->uploaded_audio ."</a>";
+            }
+
+            $html .= "<tr><td style='width:200px'>". $lecture->topic ."</td><td style='width:200px'>". $lecture->topic_desc ."</td><td style='width:80px'>". $lecture->lecture_date ."</td><td style='width:40px'>". $lec_file ."</td><td style='width:40px'>". $lec_audiofile ."</td></tr>";
         }
     }else{
             $html .= "<tr><td colspan='5'>No lectures uploaded</td></tr>";
